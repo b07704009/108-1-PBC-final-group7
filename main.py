@@ -29,13 +29,20 @@ def main2():
 
     with doc.body:
         tags.h1('Register Page')
+
         with tags.div():
             tags.attr(cls='container')
 
             with tags.form(method='POST', action="/jump"):
-                with tags.legend('Please write down your name'):
+                with tags.legend('請輸入姓名'):
                     tags.input(type='text', name='name', size=20)
-                with tags.legend('Please write down your number'):
+                with tags.legend('請輸入學號'):
+                    tags.input(type='text', name='number', size=20)
+                with tags.legend('請輸入電話'):
+                    tags.input(type='text', name='number', size=20)
+                with tags.legend('是否有台大車證(有:Y沒有:N)'):
+                    tags.input(type='text', name='number', size=20)
+                with tags.legend('腳踏車的密碼(選填)'):
                     tags.input(type='text', name='number', size=20)
                 tags.input(type='submit', value='click me')
 
