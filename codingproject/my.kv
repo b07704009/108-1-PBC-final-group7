@@ -77,5 +77,64 @@ WindowManager:
         on_release:
             app.root.current = 'shareoff'
 
+    FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.4}
+            size_hint: 0.6, 0.1
+            text:'About Me'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.4}
+            size_hint: 0.6, 0.1
+            text:'Borrow Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.6}
+            size_hint: 0.6, 0.1
+            text:'Park My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Find My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+
+
 <MainWindow>:
     name:'main'
+
+    FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.4}
+            size_hint: 0.6, 0.1
+            text:'About Me'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.6}
+            size_hint: 0.6, 0.1
+            text:'Park My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Find My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
