@@ -37,7 +37,8 @@ class ImageButton(ButtonBehavior, Image):
 
 
 class ShareOffWindow(Screen):
-    pass
+    def btn1(self):
+        pass
 
 
 class ShareOnWindow(Screen):
@@ -49,6 +50,8 @@ class MainWindow(Screen):
 
 
 class WindowManager(ScreenManager):
+    pass
+class Mybikepark(Screen):
     pass
 
 
