@@ -1,7 +1,16 @@
+# 需先安裝dominate/ os/ flask/ mysql
+"""
+Created on 25 DEC 23:14
+
+@author: 楊梅郁,劉睿哲,毛子晴
+"""
+
 import os
 import dominate
 from dominate import tags
 from flask import Flask, render_template, request
+
+import sql_function
 
 name_list = [0]
 student_id_dict = dict()
@@ -17,8 +26,82 @@ school_bike_license_temp = [0]
 bike_lock_number_temp = [0]
 password_temp = [0]
 
+"""
+name_list
+    variable name: name_list
+    variable type: list
+    variable obligation: to store the confirmed name
+
+student_id_dict
+    variable name: student_id_dict
+    variable type: dictionary
+    variable obligation: to store the confirmed student_id with the index being confirmed name
+
+telephone_number_dict
+    variable name: telephone_number_dict
+    variable type: dictionary
+    variable obligation: to store the confirmed telephone_number with the index being confirmed name
+    
+school_bike_license_dict
+    variable name: school_bike_license_dict
+    variable type: dictionary
+    variable obligation: to store the confirmed school_bike_license with the index being confirmed name
+
+bike_lock_number_dict
+    variable name: bike_lock_number_dict
+    variable type: dictionary
+    variable obligation: to store the confirmed bike_lock_number with the index being confirmed name
+
+password_dict
+    variable name: password_dict
+    variable type: dictionary
+    variable obligation: to store the confirmed password with the index being confirmed name
+
+name_list_temp
+    variable name: name_list_temp
+    variable type: list
+    variable obligation: to store the name keyed by the user before confirmation
+
+student_id_temp
+    variable name: student_id_temp
+    variable type: list
+    variable obligation: to store the student_id keyed by the user before confirmation
+
+telephone_number_temp
+    variable name: telephone_number_temp
+    variable type: list
+    variable obligation: to store the telephone_number keyed by the user before confirmation
+
+school_bike_license_temp
+    variable name: school_bike_license_temp
+    variable type: list
+    variable obligation: to store the school_bike_license keyed by the user before confirmation
+
+bike_lock_number_temp
+    variable name: bike_lock_number_temp
+    variable type: list
+    variable obligation: to store the bike_lock_number_temp keyed by the user before confirmation
+
+password_temp
+    variable name: password_temp
+    variable type: list
+    variable obligation: to store the password_temp keyed by the user before confirmation
+
+"""
+
 
 def dominate_homepage():
+    """
+    第一頁：歡迎頁面，對應到  @app.route('/')  及其函數  homepage_run()
+    目標：利用dominate寫出homepage的html並在templates資料夾中存成index1.html
+
+    分為三個區塊
+    doc = dominate.document()
+    with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+    with doc.body   (包含welcome words and a button)
+
+    最後寫入文件中(在templates資料夾中存成index1.html)
+    """
     doc = dominate.document(title='homepage')
 
     with doc.head:
@@ -41,10 +124,8 @@ def dominate_homepage():
                       text-align: center;
                       margin-left:-150px;
                       margin-top:-150px;
-                }
-
-               
-             """)
+                } 
+         """)
 
     with doc.body:
         with tags.section():
@@ -61,45 +142,58 @@ def dominate_homepage():
 dominate_homepage()
 
 
-def dominate_registerpage():
-    # 第二頁，輸入訊息頁
+def dominate_register_page():
+    """
+    第二頁：註冊頁面，對應到  @app.route('/jump')  及其函數   registerpage_run
+    目標：利用dominate寫出registerpage的html並在templates資料夾中存成index2.html
+
+    分為三個區塊
+    doc = dominate.document()
+    with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+    with doc.body   (包含 a form with 7 legends: name/ password/ student_id/
+                    telephone_number/ school_bike_license/ bike_lock_number/ picture uploading and a button submit)
+
+    最後寫入文件中(在templates資料夾中存成index2.html)
+    """
     doc = dominate.document(title="registerpage")
 
     with doc.head:
         tags.meta(name='charset', content="utf-8")
         tags.style("""\
-                        body {
-                            background-color: #F9F8F1;
-                            color: #2C232A;
-                            font-family: sans-serif;
-                            font-size: 14;
-                        }
-                        section{
-                            width: 500px;
-                            height: 500px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            overflow: auto;
-                            text-align: center;
-                            margin-left:-250px;
-                            margin-top:-250px;
-                            text-align: center;
-                        }
-                        label{
-                            cursor: pointer;
-                            display: inline-block;
-                            padding: 3px 6px;
-                            text-align: center;
-                            width: 200px;
-                            vertical-align: top;
-                        }
+            body {
+                background-color: #F9F8F1;
+                color: #2C232A;
+                font-family: sans-serif;
+                font-size: 14;
+            }
 
-                        input{
-                            font-size: inherit;
-                        }      
+            section{
+                width: 500px;
+                height: 500px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                overflow: auto;
+                text-align: center;
+                margin-left:-250px;
+                margin-top:-250px;
+                text-align: center;
+            }
 
-                     """)
+            label{
+                cursor: pointer;
+                display: inline-block;
+                padding: 3px 6px;
+                text-align: center;
+                width: 200px;
+                vertical-align: top;
+            }
+
+            input{
+                font-size: inherit;
+            }
+
+        """)
 
     with doc.body:
         tags.h1('Register Page')
@@ -134,32 +228,43 @@ def dominate_registerpage():
         f.write(doc.render())
 
 
-dominate_registerpage()
+dominate_register_page()
 
 
 def dominate_enter_page():
-    # 確認頁
+    """
+    第三頁：確認資訊頁面，對應到  @app.route('/jump')  及其函數   registerpage_run [if request.method == 'POST']
+    目標：利用dominate寫出 enter_page 的 html並在 templates 資料夾中存成 index3.html
+
+    分為三個區塊
+    doc = dominate.document()
+    with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+    with doc.body   (包含 6 information: name/ password/ student_id/
+                    telephone_number/ school_bike_license/ bike_lock_number and a button confirm)
+
+    最後寫入文件中(在templates資料夾中存成index3.html)
+    """
     doc = dominate.document(title="entered")
 
     with doc.head:
         tags.meta(name='charset', content="utf-8")
         tags.style("""\
-                    body {
-                        background-color: #F9F8F1;
-                        color: #2C232A;
-                        font-family: sans-serif;
-                        font-size: 14;
-                        text-align: center;
-                    }
-                    section{
-                            width: 250px;
-                            height: 250px;
-                            position: absolute;
-                            overflow: auto;
-                            text-align: center;
-                    }
+            body {
+                background-color: #F9F8F1;
+                color: #2C232A;
+                font-family: sans-serif;
+                font-size: 14;
+                text-align: center;
+            }
+            section{
+                    width: 250px;
+                    height: 250px;
+                    position: absolute;
+                    overflow: auto;
+                    text-align: center;
+            }
 
-                 """)
+        """)
 
     with doc.body:
         tags.h1('welcome' + str(name_list_temp[0]))
@@ -178,9 +283,12 @@ def dominate_enter_page():
                     tags.label('the status of your bike_lice' + str(school_bike_license_temp[0]))
                 with tags.legend():
                     tags.label('your bike lock number is' + str(bike_lock_number_temp[0]))
+                with tags.legend():
+                    tags.label('your password is'+ str(password_temp[0]))
                 with tags.div(cls='button', style="margin:0 auto; width:250px;"):
                     tags.input(type='button', value='confirm', style="width:120px; background-color:pink;",
                                onclick="location.href='http://127.0.0.1:5000/entered'")
+
     fn = 'templates/index3.html'
     with open(file=fn, mode='w', encoding='utf-8') as f:
         f.write(doc.render())
@@ -188,19 +296,30 @@ def dominate_enter_page():
 
 
 def dominate_final_page():
-    # 最後一頁 感謝頁
+    """
+    第四頁：感謝頁，
+    目標：利用dominate寫出 enter_page 的 html並在 templates 資料夾中存成 index4.html
+
+    分為三個區塊
+    doc = dominate.document()
+    with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+    with doc.body   (h1)
+
+    最後寫入文件中(在templates資料夾中存成index4.html)
+    """
+
     doc = dominate.document(title="photo_page")
     with doc.head:
         tags.meta(name='charset', content="utf-8")
         tags.style("""\
-                    body {
-                        background-color: #F9F8F1;
-                        color: #2C232A;
-                        font-family: sans-serif;
-                        font-size: 14;
-                        text-align: center;
-                    }
-                 """)
+            body {
+                background-color: #F9F8F1;
+                color: #2C232A;
+                font-family: sans-serif;
+                font-size: 14;
+                text-align: center;
+            }
+        """)
 
     with doc.body:
         tags.h1('Thank You!')
@@ -219,6 +338,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage_run():
+    """
+    目標：顯示index1.html，對應到 dominate_homepage的函數
+    """
     return render_template("index1.html")
 
 
@@ -227,6 +349,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/jump', methods=['GET', 'POST'])
 def registerpage_run():
+    """
+    目標：先顯示index2.html，對應到 dominate_register_page的函數，儲存使用者在index2.html上輸入的所有資訊及相片
+         若request.method為post(代表按下了register頁面的submit按鈕)顯示index3.html，對應到 dominate_enter_page的函數，
+         並顯示所有在index2.html暫存的資訊
+    """
     if request.method == 'POST':
         index = request.values['name']
         name_list_temp[0] = index
@@ -235,6 +362,7 @@ def registerpage_run():
         telephone_number_temp[0] = request.values['telephone_number']
         school_bike_license_temp[0] = request.values['bike_lock_number']
         bike_lock_number_temp[0] = request.values['bike_lock_number']
+        password_temp[0] = request.values['password']
 
         # 照片的
         img = request.files.get('photo')
@@ -249,14 +377,22 @@ def registerpage_run():
 
 
 @app.route('/entered')
-# /entered 介面要在上傳照片
 def enter_success():
+    """
+    目標：當在index3.html(enter_page)上按下confirm的按鈕，會跳轉到最後一個頁面，對應到dominate_final_page，
+    並將該資料傳入資料庫，及寫入本地的dictionary中
+    !!! 目前尚未上傳圖片的檔案，需先轉為二進制，後續可以考慮在confirm旁加上back的按鈕
+    """
     name_list.append(name_list_temp[0])
     index = name_list_temp[0]
     password_dict[index] = password_temp[0]
     student_id_dict[index] = student_id_temp[0]
     telephone_number_dict[index] = telephone_number_temp[0]
     school_bike_license_dict[index] = bike_lock_number_temp[0]
+
+    fn = (name_list_temp[0], student_id_temp[0], telephone_number_temp[0], bike_lock_number_temp[0],
+          school_bike_license_temp[0], password_temp[0])
+    sql_function.user_register(fn)
     return render_template('index4.html')
 
 
