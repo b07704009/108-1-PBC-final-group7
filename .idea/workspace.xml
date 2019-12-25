@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="ChangeListManager">
     <list default="true" id="7c131c32-31fa-4f3e-9cf3-ad459090ffbb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/sql_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/sql_function.py" afterDir="false" />
@@ -92,5 +93,19 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1409" height="219" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1577286550484" />
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1VTv5AOTCsVn1m5Nq7MJmJs84GB" />
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="251" y="205" key="com.intellij.ide.util.TipDialog" timestamp="1577289717586">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="251" y="205" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1577289717586" />
+>>>>>>> Stashed changes
   </component>
 </project>
