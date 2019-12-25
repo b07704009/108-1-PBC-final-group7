@@ -1,9 +1,10 @@
+
 WindowManager:
-    LoginWindow:
+    LoginWindow:  
     ShareOffWindow:
     ShareOnWindow:
     MainWindow:
-
+    Mybikepark:
 <LoginWindow>:
     name: 'login'
     studentid: StudentID
@@ -59,20 +60,39 @@ WindowManager:
         on_release:
             app.root.current = 'shareon'
 
+    FloatLayout:
+        Button:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'Park bike'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+                root.btn1()
+                app.root.current = 'bikepark'
+                root.manager.transition.direction = 'up'
+        Button:
+            pos_hint: {'x':0.2, 'y':0.5}
+            size_hint: 0.6, 0.1
+            text:'Borrow bike'
+            background_color: 0.3,0.4,0.5,1
+        Button:
+            pos_hint: {'x':0.2, 'y':0.1}
+            size_hint: 0.6, 0.1
+            text:'About me'
+            background_color: 0.3,0.4,0.5,1
+        Button:
+            pos_hint: {'x':0.2, 'y':0.7}
+            size_hint: 0.6, 0.1
+            text:'Find my bike'
+            background_color: 0.3,0.4,0.5,1
 
-    ImageButton:
-        source: 'mybike.png'
-        size_hint: 0.6, 0.2
-        pos_hint: {'x':0.2, 'y':0.4}
-        on_release:
-            app.root.current = 'main'
 
 <ShareOnWindow>:
     name:'shareon'
 
     ImageButton:
         source: 'on.png'
-        size_hint: 0.4, 0.1
+        size_hint: 0.1, 0.1
         pos_hint: {'x': 0.05, 'y': 0.85}
         on_release:
             app.root.current = 'shareoff'
@@ -103,11 +123,7 @@ WindowManager:
             text:'Find My Bike'
             background_color: 0.3,0.4,0.5,1
 
-        Button:
-            pos_hint: {'x':0.6, 'y':0.1}
-            size_hint: 0.3, 0.1
-            text:'Back'
-            background_color: 0.3,0.4,0.5,1
+       
 
 
 <MainWindow>:
@@ -138,3 +154,25 @@ WindowManager:
             size_hint: 0.3, 0.1
             text:'Back'
             background_color: 0.3,0.4,0.5,1
+
+<Mybikepark>:
+    name:'bikepark'
+
+   
+    FloatLayout:
+		
+        Button:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'Enter'
+            background_color: 0.3,0.4,0.5,1
+
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+                root.btnmybikepark()
+                app.root.current = 'shareoff'
+                root.manager.transition.direction = 'up'

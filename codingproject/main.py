@@ -12,9 +12,12 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
+from kivy.lang import Builder
+
 
 studentidlist = []
 passwordlist = []
+
 
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
@@ -37,7 +40,8 @@ class ImageButton(ButtonBehavior, Image):
 
 
 class ShareOffWindow(Screen):
-    pass
+    def btn1(self):
+        pass
 
 
 class ShareOnWindow(Screen):
@@ -50,6 +54,10 @@ class MainWindow(Screen):
 
 class WindowManager(ScreenManager):
     pass
+
+class Mybikepark(Screen):
+    def btnmybikepark(self):
+        pass
 
 
 kv = Builder.load_file('my.kv')
