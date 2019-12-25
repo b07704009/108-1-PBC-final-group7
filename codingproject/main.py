@@ -40,12 +40,15 @@ class ImageButton(ButtonBehavior, Image):
 
 
 class ShareOffWindow(Screen):
-    def btn1(self):
-        pass
+    pass
+    
 
 
 class ShareOnWindow(Screen):
-    pass
+    def btnbasicinformation(self):
+        pass
+
+    
 
 
 class MainWindow(Screen):
@@ -56,8 +59,17 @@ class WindowManager(ScreenManager):
     pass
 
 class Mybikepark(Screen):
-    def btnmybikepark(self):
-        pass
+    pass
+class Basicinformation(Screen):
+    pass
+class Pastfeed(Screen):
+    pass
+class Successfulrent(Screen):
+    pass
+class Bikeavailable(Screen):
+    pass
+class Bikerent(Screen):
+    pass
 
 
 kv = Builder.load_file('my.kv')
