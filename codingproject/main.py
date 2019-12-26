@@ -25,12 +25,14 @@ class Map(MapView):
 
 
 class CustomDropDown(DropDown):
-    pass
+    def dropdowntest():
 
-dropdown = CustomDropDown()
-mainbutton = Button(text='Hello', size_hint=(None, None))
-mainbutton.bind(on_release=dropdown.open)
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+        dropdown = DropDown()
+
+        mainbutton = Button(text='Hello', size_hint=(0.6, 0))
+        mainbutton.bind(on_release=dropdown.open)
+        dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+        return runTouchApp(mainbutton)
 
 
 class LoginWindow(Screen):

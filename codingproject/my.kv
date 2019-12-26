@@ -97,21 +97,7 @@ WindowManager:
 <ShareOnWindow>:
     name:'shareon'
 
-    CustomDropDown:
-        Button:
-            text: 'My first Item'
-            size_hint_y: None
-            height: 44
-            on_release: root.select('item1')
-        Label:
-            text: 'Unselectable item'
-            size_hint_y: None
-            height: 44
-        Button:
-            text: 'My second Item'
-            size_hint_y: None
-            height: 44
-            on_release: root.select('item2')
+
 
     ImageButton:
         source: 'on.png'
@@ -191,6 +177,24 @@ WindowManager:
 
 <Mybikepark>:
     name:'bikepark'
+    CustomDropDown:
+
+        pos_hint: {'x':0.2}
+        size_hint: 0.4, 0.2
+        Button:
+            text: 'My first Item'
+            size_hint_y: None
+            height: 44
+
+        Button:
+            text: 'Unselectable item'
+            size_hint_y: None
+            height: 44
+        Button:
+            text: 'My second Item'
+            size_hint_y: None
+            height: 44
+
 
 
 
@@ -334,6 +338,7 @@ WindowManager:
 <Pastfeed>:
 	name:'pastfeed'
 
+
 	FloatLayout:
 
 		Label:
@@ -356,6 +361,8 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Bikerent>:
 	name:'bikerent'
+
+
 
 	FloatLayout:
 		Button:
