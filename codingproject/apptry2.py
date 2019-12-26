@@ -1,206 +1,66 @@
+import kivy
+kivy.require('1.7.2')
+
 from kivy.app import App
-from kivy.properties import StringProperty, ListProperty
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import ObjectProperty
+from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
-
-
-from kivy.uix.togglebutton import ToggleButtonBehavior
-
-
-from kivy.adapters.models import SelectableDataItem
-
-
 from kivy.lang import Builder
 
+class CustomDropDown(DropDown):
+    pass
 
+class HomeScreen(Screen):
+    translateInput = ObjectProperty(None)
+    translateButton = ObjectProperty(None)
+    translateLabel = ObjectProperty(None)
+    top_layout = ObjectProperty(None)
+    dd_btn = ObjectProperty(None)
+    drop_down = CustomDropDown()
+    #notes_dropdown = ObjectProperty(None)
 
-Builder.load_string("""
 
+    dropdown = DropDown()
+    notes = ['Features', 'Suggestions', 'Abreviations', 'Miscellaneous']
+    for note in notes:
+     # when adding widgets, we need to specify the height manually (disabling
+     # the size_hint_y) so the dropdown can calculate the area it needs.
+     btn = Button(text='%r' % note, size_hint_y=None, height=30)
 
-#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+     # for each button, attach a callback that will call the select() method
+     # on the dropdown. We'll pass the text of the button as the data of the
+     # selection.
+     btn.bind(on_release=lambda btn: dropdown.select(btn.text))
 
+     # then add the button inside the dropdown
+     dropdown.add_widget(btn)
 
-#: import Factory kivy.factory.Factory
+    # create a big main button
+    mainbutton = Button(text='Usage Notes 2', size_hint=(1, 1))
 
+    # show the dropdown menu when the main button is released
+    # note: all the bind() calls pass the instance of the caller (here, the
+    # mainbutton instance) as the first argument of the callback (here,
+    # dropdown.open.).
+    mainbutton.bind(on_release=dropdown.open)
+    #dd_btn.bind(on_release=dropdown.open)
 
+    # one last thing, listen for the selection in the dropdown list and
+    # assign the data to the button text.
+    dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+    #dropdown.bind(on_select=lambda instance, x: setattr(dd_btn, 'text', x))
 
-<MyListItem>:
+    #top_layout.add_widget(mainbutton)
 
 
- height: 50
+kv = Builder.load_file('try.kv')
 
+class dropdApp(App):
+    def build(self):
+     return kv
 
 
- on_state: root.is_selected = args[1] =="down"
 
-
- state:"down" if root.is_selected else"normal"
-
-
-
- BoxLayout:
-
-
- spacing: 10
-
-
-
- CheckBox:
-
-
- on_state: root.is_selected = args[1] =="down"
-
-
- state:"down" if root.is_selected else"normal"
-
-
- # on_state: root.state = args[1]
-
-
- # state: root.state
-
-
-
- Label:
-
-
- text: root.name
-
-
-
-<Page>:
-
-
- orientation:"vertical"
-
-
-
- ListView:
-
-
- id: LV
-
-
- adapter: ListAdapter(data=root.data, cls=Factory.MyListItem, args_converter=root.args_converter, selection_mode="multiple", propagate_selection_to_data=True)
-
-
-
- Button:
-
-
- size_hint_y: None
-
-
- text:"print selection"
-
-
- on_press: print(LV.adapter.selection)
-
-
-""")
-
-
-
-class MyListItem(ToggleButtonBehavior, SelectableView, BoxLayout):
-
-
- name = StringProperty()
-
-
-
- def __repr__(self):
-
-
- return"%s(name=%r)" % (type(self).__name__, self.name)
-
-
-
- def on_state(self, me, state):
-
-
- print me, state
-
-
- if state =="down":
-
-
- self.select()
-
-
- else:
-
-
- self.deselect()
-
-
- # self.is_selected = state =="down"
-
-
-
-class DataItem(SelectableDataItem):
-
-
- def __init__(self, name, **kwargs):
-
-
- super(DataItem, self).__init__(**kwargs)
-
-
- self.name = name
-
-
-
- def __repr__(self):
-
-
- return"%s(name=%r, is_selected=%r)" % (type(self).__name__, self.name, self.is_selected)
-
-
-
-class Page(BoxLayout):
-
-
- data = ListProperty()
-
-
-
- def __init__(self, **kwargs):
-
-
- super(Page, self).__init__(**kwargs)
-
-
- self.data = [DataItem("Item {}".format(i), is_selected=True) for i in range(10)]
-
-
-
- def args_converter(self, index, data_item):
-
-
- return {
-
-
-"index": index,
-
-
-"name": data_item.name,
-
-
- }
-
-
-
-class ExampleApp(App):
-
-
- def build(self):
-
-
- return Page()
-
-
-
-if __name__ =="__main__":
-
-
- ExampleApp().run()
+if __name__ == '__main__':
+    dropdApp().run()
