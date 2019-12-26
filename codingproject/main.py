@@ -1,7 +1,5 @@
-
 import sys
 from kivy.garden.mapview import MapView, MapMarker
-
 import kivy
 from kivy.app import App
 from kivy.uix.dropdown import DropDown
