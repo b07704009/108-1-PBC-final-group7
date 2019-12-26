@@ -1,4 +1,5 @@
-
+import sys
+from kivy.garden.mapview import MapView, MapMarker
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -18,7 +19,8 @@ from kivy.lang import Builder
 studentidlist = []
 passwordlist = []
 
-
+class Map(MapView):
+    pass
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
     password = ObjectProperty(None)
@@ -72,7 +74,7 @@ class Bikerent(Screen):
     pass
 
 
-kv = Builder.load_file('my.kv')
+kv = Builder.load_file('my.kv',  encoding="utf-8")
 
 
 class MyMainApp(App):
