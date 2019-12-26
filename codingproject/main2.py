@@ -1,6 +1,5 @@
 import kivy
 from kivy.app import App
-from kivy.uix.dropdown import DropDown
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -8,23 +7,15 @@ from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.uix.floatlayout import FloatLayout
+from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
 from kivy.lang import Builder
-from kivy.base import runTouchApp
 
 studentidlist = []
 passwordlist = []
 
-
-class CustomDropDown(DropDown):
-    pass
-
-dropdown = CustomDropDown()
-mainbutton = Button(text='Hello', size_hint=(None, None))
-mainbutton.bind(on_release=dropdown.open)
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
