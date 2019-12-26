@@ -1,6 +1,5 @@
-
 WindowManager:
-    LoginWindow:  
+    LoginWindow:
     ShareOffWindow:
     ShareOnWindow:
     MainWindow:
@@ -72,17 +71,17 @@ WindowManager:
             text:'Park bike'
             background_color: 0.3,0.4,0.5,1
             on_release:
-             
+
                 app.root.current = 'bikepark'
                 root.manager.transition.direction = 'up'
-        
+
         Button:
             pos_hint: {'x':0.2, 'y':0.3}
             size_hint: 0.6, 0.1
             text:'About me'
             background_color: 0.3,0.4,0.5,1
 			on_release:
-             
+
                 app.root.current = 'basicinformation'
                 root.manager.transition.direction = 'up'
         Button:
@@ -97,6 +96,22 @@ WindowManager:
 
 <ShareOnWindow>:
     name:'shareon'
+
+    CustomDropDown:
+        Button:
+            text: 'My first Item'
+            size_hint_y: None
+            height: 44
+            on_release: root.select('item1')
+        Label:
+            text: 'Unselectable item'
+            size_hint_y: None
+            height: 44
+        Button:
+            text: 'My second Item'
+            size_hint_y: None
+            height: 44
+            on_release: root.select('item2')
 
     ImageButton:
         source: 'on.png'
@@ -121,7 +136,7 @@ WindowManager:
             size_hint: 0.6, 0.1
             text:'Park My Bike'
             background_color: 0.3,0.4,0.5,1
-			on_release:   
+			on_release:
                 app.root.current = 'bikepark'
                 root.manager.transition.direction = 'up'
 
@@ -138,11 +153,11 @@ WindowManager:
             size_hint: 0.6, 0.1
             text:'About me'
             background_color: 0.3,0.4,0.5,1
-			on_release:   
+			on_release:
                 app.root.current = 'basicinformation'
                 root.manager.transition.direction = 'up'
 
-       
+
 
 
 <MainWindow>:
@@ -176,7 +191,6 @@ WindowManager:
 
 <Mybikepark>:
     name:'bikepark'
-
 
 
 
@@ -273,11 +287,8 @@ WindowManager:
                         halign: "center"
 
 
-
-
-
     FloatLayout:
-		
+
         Button:
             pos_hint: {'x':0.2, 'y':0.3}
             size_hint: 0.6, 0.1
@@ -293,16 +304,16 @@ WindowManager:
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
-            
+
                 app.root.current = 'shareoff'
                 root.manager.transition.direction = 'up'
-				
-				
+
+
 <Basicinformation>:
 	name:'basicinformation'
-	
+
 	FloatLayout:
-		
+
         Button:
             pos_hint: {'x':0.1, 'y':0.1}
             size_hint: 0.3, 0.1
@@ -322,9 +333,9 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Pastfeed>:
 	name:'pastfeed'
-	
+
 	FloatLayout:
-	
+
 		Label:
             pos_hint: {'x':0.2, 'y':0.8}
             size_hint: 0.6, 0.1
@@ -345,7 +356,7 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Bikerent>:
 	name:'bikerent'
-	
+
 	FloatLayout:
 		Button:
             pos_hint: {'x':0.2, 'y':0.3}
@@ -362,24 +373,24 @@ WindowManager:
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
-            
+
                 app.root.current = 'shareon'
                 root.manager.transition.direction = 'up'
 <Bikeavailable>:
 	name:'bikeavailable'
-	
+
 	FloatLayout:
-	
+
 		Button:
             pos_hint: {'x':0.6, 'y':0.1}
             size_hint: 0.3, 0.1
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
-            
+
                 app.root.current = 'bikerent'
                 root.manager.transition.direction = 'up'
-		
+
 		Label:
             pos_hint: {'x':0.2, 'y':0.8}
             size_hint: 0.6, 0.1
@@ -388,15 +399,15 @@ WindowManager:
 
 <Successfulrent>:
 	name:'successfulrent'
-	
+
 	FloatLayout:
-	
+
 		Label:
             pos_hint: {'x':0.2, 'y':0.2}
             size_hint: 0.6, 0.1
             text:'Password'
             color: 0.3,0.6,0.7,1
-			
+
 		Label:
             pos_hint: {'x':0.2, 'y':0.1}
             size_hint: 0.6, 0.1
@@ -408,12 +419,6 @@ WindowManager:
             text:'Enter'
             background_color: 0.3,0.4,0.5,1
             on_release:
-            
+
                 app.root.current = 'pastfeed'
                 root.manager.transition.direction = 'up'
-	
-	
-		
-		
-	
-	
