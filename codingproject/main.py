@@ -1,3 +1,5 @@
+import sys
+from kivy.garden.mapview import MapView, MapMarker
 import kivy
 from kivy.app import App
 from kivy.uix.dropdown import DropDown
@@ -18,13 +20,20 @@ studentidlist = []
 passwordlist = []
 
 
-class CustomDropDown(DropDown):
+class Map(MapView):
     pass
 
-dropdown = CustomDropDown()
-mainbutton = Button(text='Hello', size_hint=(None, None))
-mainbutton.bind(on_release=dropdown.open)
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+
+class CustomDropDown(DropDown):
+    def dropdowntest():
+
+        dropdown = DropDown()
+
+        mainbutton = Button(text='Hello', size_hint=(0.6, 0))
+        mainbutton.bind(on_release=dropdown.open)
+        dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
+        return runTouchApp(mainbutton)
+
 
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
@@ -87,7 +96,7 @@ class Bikerent(Screen):
     pass
 
 
-kv = Builder.load_file('my.kv')
+kv = Builder.load_file('my.kv',  encoding="utf-8")
 
 
 class MyMainApp(App):
