@@ -1,0 +1,431 @@
+WindowManager:
+    LoginWindow:
+    ShareOffWindow:
+    ShareOnWindow:
+    MainWindow:
+    Mybikepark:
+	Basicinformation:
+	Pastfeed:
+	Bikerent:
+	Bikeavailable:
+	Successfulrent:
+<LoginWindow>:
+    name: 'login'
+    studentid: StudentID
+    password: Password
+
+    FloatLayout:
+
+        Label:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'WELCOME'
+            color: 0.3,0.6,0.7,1
+
+        Label:
+            pos_hint: {'x':0.1, 'y':0.6}
+            size_hint: 0.3, 0.1
+            text:'StudentID'
+
+        TextInput:
+            pos_hint: {'x':0.4, 'y':0.6}
+            size_hint: 0.5, 0.1
+            id: StudentID
+            multiline: False
+
+        Label:
+            pos_hint: {'x':0.1, 'y':0.5}
+            size_hint: 0.3, 0.1
+            text: 'Password'
+
+        TextInput:
+            pos_hint: {'x':0.4, 'y':0.5}
+            size_hint: 0.5, 0.1
+            id: Password
+            multiline: False
+
+        Button:
+            pos_hint: {'x':0.3, 'y':0.2}
+            size_hint: 0.4, 0.1
+            text:'Login'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+                root.btn()
+                app.root.current = 'shareoff'
+                root.manager.transition.direction = 'up'
+
+<ShareOffWindow>:
+    name:'shareoff'
+
+    ImageButton:
+        source: 'off.png'
+        size_hint: 0.4, 0.1
+        pos_hint: {'x': 0.05, 'y': 0.85}
+        on_release:
+            app.root.current = 'shareon'
+
+    FloatLayout:
+        Button:
+            pos_hint: {'x':0.2, 'y':0.5}
+            size_hint: 0.6, 0.1
+            text:'Park bike'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+
+                app.root.current = 'bikepark'
+                root.manager.transition.direction = 'up'
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'About me'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+
+                app.root.current = 'basicinformation'
+                root.manager.transition.direction = 'up'
+        Button:
+            pos_hint: {'x':0.2, 'y':0.7}
+            size_hint: 0.6, 0.1
+            text:'Find my bike'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'pastfeed'
+                root.manager.transition.direction = 'up'
+
+
+<ShareOnWindow>:
+    name:'shareon'
+
+
+
+    ImageButton:
+        source: 'on.png'
+        size_hint: 0.1, 0.1
+        pos_hint: {'x': 0.05, 'y': 0.85}
+        on_release:
+            app.root.current = 'shareoff'
+
+    FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.4}
+            size_hint: 0.6, 0.1
+            text:'Borrow Bike'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'bikerent'
+                root.manager.transition.direction = 'up'
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.6}
+            size_hint: 0.6, 0.1
+            text:'Park My Bike'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'bikepark'
+                root.manager.transition.direction = 'up'
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Find My Bike'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'pastfeed'
+                root.manager.transition.direction = 'up'
+		Button:
+            pos_hint: {'x':0.2, 'y':0.2}
+            size_hint: 0.6, 0.1
+            text:'About me'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'basicinformation'
+                root.manager.transition.direction = 'up'
+
+
+
+
+<MainWindow>:
+    name:'main'
+
+    FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.4}
+            size_hint: 0.6, 0.1
+            text:'About Me'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.6}
+            size_hint: 0.6, 0.1
+            text:'Park My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Find My Bike'
+            background_color: 0.3,0.4,0.5,1
+
+        Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+
+<Mybikepark>:
+    name:'bikepark'
+    CustomDropDown:
+
+        pos_hint: {'x':0.2}
+        size_hint: 0.4, 0.2
+        Button:
+            text: 'My first Item'
+            size_hint_y: None
+            height: 44
+
+        Button:
+            text: 'Unselectable item'
+            size_hint_y: None
+            height: 44
+        Button:
+            text: 'My second Item'
+            size_hint_y: None
+            height: 44
+
+
+
+
+    MapView:
+        size_hint: 0.7, 0.5
+        pos_hint:{'x':0.15, 'y':0.45}
+        lat: 25.0141405
+        lon: 121.5375631
+        zoom: 16
+
+        MapMarkerPopup:
+            lat: 25.0127570
+            lon: 121.5366015
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n(Roosevelt Road)\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.0125027
+            lon: 121.5371646
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n(Parking Lot)\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.01361
+            lon: 121.5367988
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n(Inside the campus)\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.014033
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building I[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.015633
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Common Subjects Building[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+
+    FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'Enter'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'pastfeed'
+                root.manager.transition.direction = 'up'
+
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+
+                app.root.current = 'shareoff'
+                root.manager.transition.direction = 'up'
+
+
+<Basicinformation>:
+	name:'basicinformation'
+
+	FloatLayout:
+
+        Button:
+            pos_hint: {'x':0.1, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Log out'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'login'
+                root.manager.transition.direction = 'up'
+
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+                app.root.current = 'shareoff'
+                root.manager.transition.direction = 'up'
+<Pastfeed>:
+	name:'pastfeed'
+
+
+	FloatLayout:
+
+		Label:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Past feeds'
+            color: 0.3,0.6,0.7,1
+		Label:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'Latest'
+            color: 0.3,0.6,0.7,1
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back to menu'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+                app.root.current = 'shareoff'
+                root.manager.transition.direction = 'up'
+<Bikerent>:
+	name:'bikerent'
+
+
+
+	FloatLayout:
+		Button:
+            pos_hint: {'x':0.2, 'y':0.3}
+            size_hint: 0.6, 0.1
+            text:'Enter'
+            background_color: 0.3,0.4,0.5,1
+			on_release:
+                app.root.current = 'bikeavailable'
+                root.manager.transition.direction = 'up'
+
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+
+                app.root.current = 'shareon'
+                root.manager.transition.direction = 'up'
+<Bikeavailable>:
+	name:'bikeavailable'
+
+	FloatLayout:
+
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Back'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+
+                app.root.current = 'bikerent'
+                root.manager.transition.direction = 'up'
+
+		Label:
+            pos_hint: {'x':0.2, 'y':0.8}
+            size_hint: 0.6, 0.1
+            text:'Available bikes'
+            color: 0.3,0.6,0.7,1
+
+<Successfulrent>:
+	name:'successfulrent'
+
+	FloatLayout:
+
+		Label:
+            pos_hint: {'x':0.2, 'y':0.2}
+            size_hint: 0.6, 0.1
+            text:'Password'
+            color: 0.3,0.6,0.7,1
+
+		Label:
+            pos_hint: {'x':0.2, 'y':0.1}
+            size_hint: 0.6, 0.1
+            text:'Serial code'
+            color: 0.3,0.6,0.7,1
+		Button:
+            pos_hint: {'x':0.6, 'y':0.1}
+            size_hint: 0.3, 0.1
+            text:'Enter'
+            background_color: 0.3,0.4,0.5,1
+            on_release:
+
+                app.root.current = 'pastfeed'
+                root.manager.transition.direction = 'up'
