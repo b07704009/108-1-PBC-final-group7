@@ -11,37 +11,11 @@ dbforpbc = mysql.connector.connect(
 cursor = dbforpbc.cursor()
 
 
-<<<<<<< Updated upstream
-def user_register(userinfo):
-    sqlstuff = "INSERT INTO users (name, student_id, phone, bike_password,bike_license,password) " \
-               "VALUES (%s,%s,%s,%s,%s,%s)"
-    # the data going to be inserted must be tuple
-    # the order of the info must be name,id,phone,bike)_license,bike_password
-    # checking the data user inputed is needed
-    records = userinfo
-    cursor.execute(sqlstuff, records)
-    dbforpbc.commit()  # or the data inserted won't be saved
-    cursor.close()
-    dbforpbc.close()  # close the mysql connection or their will show max user connection
-=======
 def convertToBinaryData(filename):
     # Convert digital data to binary format
     with open(filename, 'rb') as file:
         binaryData = file.read()
     return binaryData
-
-#
-# def user_register(userinfo):
-#     sqlstuff = "INSERT INTO users (name, student_id, phone, bike_password,bike_license,password) " \
-#                "VALUES (%s,%s,%s,%s,%s,%s)"
-#     # the data going to be inserted must be tuple
-#     # the order of the info must be name,id,phone,bike)_license,bike_password
-#     # checking the data user inputed is needed
-#     records = userinfo
-#     cursor.execute(sqlstuff, records)
-#     dbforpbc.commit()  # or the data inserted won't be saved
-#     cursor.close()
-#     dbforpbc.close()  # close the mysql connection or their will show max user connection
 
 
 def user_register(userinfo, image):
@@ -53,12 +27,9 @@ def user_register(userinfo, image):
     empPicture = convertToBinaryData(image)
     insert_blob_tuple = (userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], userinfo[5], empPicture)
     cursor.execute(sqlstuff, insert_blob_tuple)
-    # print(records)
-    # dbforpbc.commit()
-    # cursor.execute("UPDATE users SET image = '%s' WHERE student_id = '%s'" % (str(image), records[1]))
     dbforpbc.commit()  # or the data inserted won't be saved
     cursor.close()
     dbforpbc.close()  # close the mysql connection or their will show max user connection
 
 
->>>>>>> Stashed changes
+
