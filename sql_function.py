@@ -32,4 +32,15 @@ def user_register(userinfo, image):
     dbforpbc.close()  # close the mysql connection or their will show max user connection
 
 
+def login_success(login_id, password):
+    cursor.execute("SELECT student_id, password FROM users WHERE student_id = '%s'" % login_id)
+    result = cursor.fetchall()
+    if len(result) != 1:
+        return False
+    else:
+        if result[0][1] == password:
+            return True
+        else:
+            return False
+
 
