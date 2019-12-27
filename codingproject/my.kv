@@ -14,7 +14,21 @@ WindowManager:
     studentid: StudentID
     password: Password
 
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
+
     FloatLayout:
+
+
+
+
 
         Label:
             pos_hint: {'x':0.2, 'y':0.8}
@@ -26,6 +40,7 @@ WindowManager:
             pos_hint: {'x':0.1, 'y':0.6}
             size_hint: 0.3, 0.1
             text:'StudentID'
+            color: 0.3,0.6,0.7,1
 
         TextInput:
             pos_hint: {'x':0.4, 'y':0.6}
@@ -37,6 +52,7 @@ WindowManager:
             pos_hint: {'x':0.1, 'y':0.5}
             size_hint: 0.3, 0.1
             text: 'Password'
+            color: 0.3,0.6,0.7,1
 
         TextInput:
             pos_hint: {'x':0.4, 'y':0.5}
@@ -56,6 +72,15 @@ WindowManager:
 
 <ShareOffWindow>:
     name:'shareoff'
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
 
     ImageButton:
         source: 'off.png'
@@ -96,6 +121,16 @@ WindowManager:
 
 <ShareOnWindow>:
     name:'shareon'
+
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
 
 
 
@@ -149,6 +184,15 @@ WindowManager:
 <MainWindow>:
     name:'main'
 
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
+
     FloatLayout:
 
         Button:
@@ -177,6 +221,15 @@ WindowManager:
 
 <Mybikepark>:
     name:'bikepark'
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
     CustomDropDown:
 
         pos_hint: {'x':0.2}
@@ -315,6 +368,14 @@ WindowManager:
 
 <Basicinformation>:
 	name:'basicinformation'
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
 
 	FloatLayout:
 
@@ -337,6 +398,15 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Pastfeed>:
 	name:'pastfeed'
+
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
 
 
 	FloatLayout:
@@ -361,6 +431,33 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Bikerent>:
 	name:'bikerent'
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
+
+
+	CustomDropDown:
+
+        pos_hint: {'x':0.2}
+        size_hint: 0.4, 0.2
+        Button:
+            text: 'My first Item'
+            size_hint_y: None
+            height: 44
+
+        Button:
+            text: 'Unselectable item'
+            size_hint_y: None
+            height: 44
+        Button:
+            text: 'My second Item'
+            size_hint_y: None
+            height: 44
 
 
 
@@ -386,6 +483,15 @@ WindowManager:
 <Bikeavailable>:
 	name:'bikeavailable'
 
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
+
 	FloatLayout:
 
 		Button:
@@ -406,6 +512,15 @@ WindowManager:
 
 <Successfulrent>:
 	name:'successfulrent'
+
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\pngtree-cute-background-illustration-image_280992.jpg")
+                pos: self.pos
+                size: self.size
 
 	FloatLayout:
 
@@ -429,3 +544,5 @@ WindowManager:
 
                 app.root.current = 'pastfeed'
                 root.manager.transition.direction = 'up'
+
+
