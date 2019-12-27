@@ -20,7 +20,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -78,7 +78,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -128,7 +128,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -189,7 +189,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -227,7 +227,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
     CustomDropDown:
@@ -248,19 +248,16 @@ WindowManager:
             size_hint_y: None
             height: 44
 
-
-
-
     MapView:
         size_hint: 0.7, 0.5
         pos_hint:{'x':0.15, 'y':0.45}
-        lat: 25.0141405
+        lat: 25.0148405
         lon: 121.5375631
         zoom: 16
 
         MapMarkerPopup:
-            lat: 25.0127570
-            lon: 121.5366015
+            lat: 25.0153570
+            lon: 121.5354015
             popup_size: dp(430), dp(130)
 
             Bubble:
@@ -268,10 +265,10 @@ WindowManager:
                     orientation: "horizontal"
                     padding: "5dp"
                     AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        source: "GirlsDorm.png"
                         mipmap: True
                     Label:
-                        text: "[b]Management Building II[/b]\n(Roosevelt Road)\n6 bikes available"
+                        text: "[b]Freshman Women's Dorm[/b]"
                         markup: True
                         halign: "center"
 
@@ -283,46 +280,12 @@ WindowManager:
             Bubble:
                 BoxLayout:
                     orientation: "horizontal"
-                    padding: "5dp"
+                    padding: "10dp"
                     AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        source: "ParkingLot.png"
                         mipmap: True
                     Label:
-                        text: "[b]Management Building II[/b]\n(Parking Lot)\n6 bikes available"
-                        markup: True
-                        halign: "center"
-
-        MapMarkerPopup:
-            lat: 25.01361
-            lon: 121.5367988
-            popup_size: dp(430), dp(130)
-
-            Bubble:
-                BoxLayout:
-                    orientation: "horizontal"
-                    padding: "5dp"
-                    AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
-                        mipmap: True
-                    Label:
-                        text: "[b]Management Building II[/b]\n(Inside the campus)\n6 bikes available"
-                        markup: True
-                        halign: "center"
-
-        MapMarkerPopup:
-            lat: 25.014033
-            lon: 121.537506
-            popup_size: dp(430), dp(130)
-
-            Bubble:
-                BoxLayout:
-                    orientation: "horizontal"
-                    padding: "5dp"
-                    AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
-                        mipmap: True
-                    Label:
-                        text: "[b]Management Building I[/b]\n6 bikes available"
+                        text: "[b]Management Building II[/b]\n(Parking Lot)"
                         markup: True
                         halign: "center"
 
@@ -339,10 +302,43 @@ WindowManager:
                         source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
                         mipmap: True
                     Label:
-                        text: "[b]Common Subjects Building[/b]\n6 bikes available"
+                        text: "[b]Common Subjects Building[/b]"
                         markup: True
                         halign: "center"
 
+        MapMarkerPopup:
+            lat: 25.014033
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management I.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building I[/b]"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.01361
+            lon: 121.5367988
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management II.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]"
+                        markup: True
+                        halign: "center"
 
     FloatLayout:
 
@@ -373,7 +369,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -404,7 +400,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -436,7 +432,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -458,7 +454,97 @@ WindowManager:
             text: 'My second Item'
             size_hint_y: None
             height: 44
+    MapView:
+        size_hint: 0.7, 0.5
+        pos_hint:{'x':0.15, 'y':0.45}
+        lat: 25.0148405
+        lon: 121.5375631
+        zoom: 16
 
+        MapMarkerPopup:
+            lat: 25.0153570
+            lon: 121.5354015
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "GirlsDorm.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Freshman Women's Dorm[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.0125027
+            lon: 121.5371646
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "10dp"
+                    AsyncImage:
+                        source: "ParkingLot.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n(Parking Lot)\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.015633
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Common Subjects Building[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.014033
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management I.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building I[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.01361
+            lon: 121.5367988
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management II.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
 
 
 	FloatLayout:
@@ -488,7 +574,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
@@ -518,7 +604,7 @@ WindowManager:
 
             BorderImage:
                 border:10, 10, 10, 10
-                source:(r"C:\Users\jhsnu\Documents\GitHub\108-1-PBC-final-group7\codingproject\Blue Orange Photo Travel Picture Postcard.png")
+                source:("Blue Orange Photo Travel Picture Postcard.png")
                 pos: self.pos
                 size: self.size
 
