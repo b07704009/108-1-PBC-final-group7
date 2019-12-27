@@ -25,6 +25,7 @@ telephone_number_temp = [0]
 school_bike_license_temp = [0]
 bike_lock_number_temp = [0]
 password_temp = [0]
+to_convert = 0
 
 """
 name_list
@@ -369,6 +370,8 @@ def registerpage_run():
         path = basedir + "/static/photo/"
         file_path = path + img.filename
         img.save(file_path)
+        global to_convert
+        to_convert = file_path
         print('上傳頭像成功，上傳的使用者是：' + index)
 
         dominate_enter_page()
@@ -392,7 +395,7 @@ def enter_success():
 
     fn = (name_list_temp[0], student_id_temp[0], telephone_number_temp[0], bike_lock_number_temp[0],
           school_bike_license_temp[0], password_temp[0])
-    sql_function.user_register(fn)
+    sql_function.user_register(fn, to_convert)
     return render_template('index4.html')
 
 
