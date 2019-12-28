@@ -71,14 +71,15 @@ def login_success(login_id, password):
 
 
 def update_loction(s_id, cur_location):
-    # cur_location must be the id of the location
     try:
         connect_to_db()
     except mysql.connector.Error as e:
         print("Error:", e)  # errno, sqlstate, msg values
         print("Please try again later")
     else:
-        cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (cur_location, s_id))
+        cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % cur_location)
+        update_id = cursor.fetchall()[0][0]
+        cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, s_id))
         dbforpbc.commit()
         cursor.close()
         dbforpbc.close()
@@ -91,12 +92,19 @@ def check_location(s_id):
         print("Error:", e)  # errno, sqlstate, msg values
         print("Please try again later")
     else:
-        cursor.execute("SELECT current_location_id FROM users WHERE student_id = '%s'" % s_id)
-        # using join to return the name of the parking space instead of id would be better
+        sql = "SELECT \
+          parking_space.p_name\
+          FROM users \
+          INNER JOIN parking_space ON users.current_location_id = parking_space.place_id \
+          WHERE users.student_id = '%s'"
+        cursor.execute(sql % s_id)
         locat = cursor.fetchall()
         cursor.close()
         dbforpbc.close()
-        return locat[0][0]
+        if len(locat) != 1:
+            return "Something wrong"
+        else:
+            return locat[0][0]
 
 
 def being_used():
