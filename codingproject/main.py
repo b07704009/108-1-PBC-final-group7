@@ -1,4 +1,7 @@
+
 import sys
+from mysql.connector.errors import Error
+import mysql.connector
 from kivy.garden.mapview import MapView, MapMarker
 import kivy
 from kivy.app import App
@@ -19,20 +22,35 @@ from kivy.base import runTouchApp
 studentidlist = []
 passwordlist = []
 
+config = {
+        'host': 'johnny.heliohost.org',
+        'user': 'pbcbike_root',
+        'password': 'password0987',
+        'database': 'pbcbike_pbc108'
+}
+dbforpbc = mysql.connector.connect(**config)
+cursor = dbforpbc.cursor()
+
+def connect_to_db():
+    global dbforpbc
+    dbforpbc = mysql.connector.connect(**config)
+    global cursor
+    cursor = dbforpbc.cursor()
+
+
+
 
 class Map(MapView):
     pass
 
 
 class CustomDropDown(DropDown):
-    def dropdowntest():
+    pass
 
-        dropdown = DropDown()
-
-        mainbutton = Button(text='Hello', size_hint=(0.6, 0))
-        mainbutton.bind(on_release=dropdown.open)
-        dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
-        return runTouchApp(mainbutton)
+dropdown = CustomDropDown()
+mainbutton = Button(text='Hello', size_hint=(None, None))
+mainbutton.bind(on_release=dropdown.open)
+dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
 
 class LoginWindow(Screen):
@@ -86,7 +104,6 @@ class Pastfeed(Screen):
 
 class Successfulrent(Screen):
     pass
-
 
 
 class Bikeavailable(Screen):
