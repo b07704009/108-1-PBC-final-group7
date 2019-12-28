@@ -14,18 +14,33 @@ WindowManager:
     studentid: StudentID
     password: Password
 
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
+
     FloatLayout:
+
+
+
+
 
         Label:
             pos_hint: {'x':0.2, 'y':0.8}
             size_hint: 0.6, 0.1
             text:'WELCOME'
-            color: 0.3,0.6,0.7,1
+            color: 1,1,1,1
 
         Label:
             pos_hint: {'x':0.1, 'y':0.6}
             size_hint: 0.3, 0.1
             text:'StudentID'
+            color: 1,1,1,1
 
         TextInput:
             pos_hint: {'x':0.4, 'y':0.6}
@@ -37,6 +52,7 @@ WindowManager:
             pos_hint: {'x':0.1, 'y':0.5}
             size_hint: 0.3, 0.1
             text: 'Password'
+            color: 1,1,1,1
 
         TextInput:
             pos_hint: {'x':0.4, 'y':0.5}
@@ -56,6 +72,15 @@ WindowManager:
 
 <ShareOffWindow>:
     name:'shareoff'
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
 
     ImageButton:
         source: 'off.png'
@@ -96,6 +121,16 @@ WindowManager:
 
 <ShareOnWindow>:
     name:'shareon'
+
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
 
 
 
@@ -149,6 +184,15 @@ WindowManager:
 <MainWindow>:
     name:'main'
 
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
+
     FloatLayout:
 
         Button:
@@ -177,6 +221,15 @@ WindowManager:
 
 <Mybikepark>:
     name:'bikepark'
+
+    GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
     CustomDropDown:
 
         pos_hint: {'x':0.2}
@@ -195,19 +248,16 @@ WindowManager:
             size_hint_y: None
             height: 44
 
-
-
-
     MapView:
         size_hint: 0.7, 0.5
         pos_hint:{'x':0.15, 'y':0.45}
-        lat: 25.0141405
+        lat: 25.0148405
         lon: 121.5375631
         zoom: 16
 
         MapMarkerPopup:
-            lat: 25.0127570
-            lon: 121.5366015
+            lat: 25.0153570
+            lon: 121.5354015
             popup_size: dp(430), dp(130)
 
             Bubble:
@@ -215,10 +265,10 @@ WindowManager:
                     orientation: "horizontal"
                     padding: "5dp"
                     AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        source: "GirlsDorm.png"
                         mipmap: True
                     Label:
-                        text: "[b]Management Building II[/b]\n(Roosevelt Road)\n6 bikes available"
+                        text: "[b]Freshman Women's Dorm[/b]"
                         markup: True
                         halign: "center"
 
@@ -230,46 +280,12 @@ WindowManager:
             Bubble:
                 BoxLayout:
                     orientation: "horizontal"
-                    padding: "5dp"
+                    padding: "10dp"
                     AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        source: "ParkingLot.png"
                         mipmap: True
                     Label:
-                        text: "[b]Management Building II[/b]\n(Parking Lot)\n6 bikes available"
-                        markup: True
-                        halign: "center"
-
-        MapMarkerPopup:
-            lat: 25.01361
-            lon: 121.5367988
-            popup_size: dp(430), dp(130)
-
-            Bubble:
-                BoxLayout:
-                    orientation: "horizontal"
-                    padding: "5dp"
-                    AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
-                        mipmap: True
-                    Label:
-                        text: "[b]Management Building II[/b]\n(Inside the campus)\n6 bikes available"
-                        markup: True
-                        halign: "center"
-
-        MapMarkerPopup:
-            lat: 25.014033
-            lon: 121.537506
-            popup_size: dp(430), dp(130)
-
-            Bubble:
-                BoxLayout:
-                    orientation: "horizontal"
-                    padding: "5dp"
-                    AsyncImage:
-                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
-                        mipmap: True
-                    Label:
-                        text: "[b]Management Building I[/b]\n6 bikes available"
+                        text: "[b]Management Building II[/b]\n(Parking Lot)"
                         markup: True
                         halign: "center"
 
@@ -286,10 +302,43 @@ WindowManager:
                         source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
                         mipmap: True
                     Label:
-                        text: "[b]Common Subjects Building[/b]\n6 bikes available"
+                        text: "[b]Common Subjects Building[/b]"
                         markup: True
                         halign: "center"
 
+        MapMarkerPopup:
+            lat: 25.014033
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management I.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building I[/b]"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.01361
+            lon: 121.5367988
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management II.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]"
+                        markup: True
+                        halign: "center"
 
     FloatLayout:
 
@@ -315,6 +364,14 @@ WindowManager:
 
 <Basicinformation>:
 	name:'basicinformation'
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
 
 	FloatLayout:
 
@@ -337,6 +394,15 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Pastfeed>:
 	name:'pastfeed'
+
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
 
 
 	FloatLayout:
@@ -361,7 +427,124 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Bikerent>:
 	name:'bikerent'
+	GridLayout
+        canvas.before:
 
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
+
+
+	CustomDropDown:
+
+        pos_hint: {'x':0.2}
+        size_hint: 0.4, 0.2
+        Button:
+            text: 'My first Item'
+            size_hint_y: None
+            height: 44
+
+        Button:
+            text: 'Unselectable item'
+            size_hint_y: None
+            height: 44
+        Button:
+            text: 'My second Item'
+            size_hint_y: None
+            height: 44
+    MapView:
+        size_hint: 0.7, 0.5
+        pos_hint:{'x':0.15, 'y':0.45}
+        lat: 25.0148405
+        lon: 121.5375631
+        zoom: 16
+
+        MapMarkerPopup:
+            lat: 25.0153570
+            lon: 121.5354015
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "GirlsDorm.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Freshman Women's Dorm[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.0125027
+            lon: 121.5371646
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "10dp"
+                    AsyncImage:
+                        source: "ParkingLot.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n(Parking Lot)\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.015633
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "https://upload.wikimedia.org/wikipedia/commons/a/ae/%E8%87%BA%E7%81%A3%E5%A4%A7%E5%AD%B8%E7%AC%AC%E4%BA%8C%E5%AD%B8%E7%94%9F%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83-2.JPG"
+                        mipmap: True
+                    Label:
+                        text: "[b]Common Subjects Building[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.014033
+            lon: 121.537506
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management I.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building I[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
+
+        MapMarkerPopup:
+            lat: 25.01361
+            lon: 121.5367988
+            popup_size: dp(430), dp(130)
+
+            Bubble:
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: "5dp"
+                    AsyncImage:
+                        source: "Management II.png"
+                        mipmap: True
+                    Label:
+                        text: "[b]Management Building II[/b]\n6 bikes available"
+                        markup: True
+                        halign: "center"
 
 
 	FloatLayout:
@@ -386,6 +569,15 @@ WindowManager:
 <Bikeavailable>:
 	name:'bikeavailable'
 
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
+
 	FloatLayout:
 
 		Button:
@@ -406,6 +598,15 @@ WindowManager:
 
 <Successfulrent>:
 	name:'successfulrent'
+
+	GridLayout
+        canvas.before:
+
+            BorderImage:
+                border:10, 10, 10, 10
+                source:("Blue Orange Photo Travel Picture Postcard.png")
+                pos: self.pos
+                size: self.size
 
 	FloatLayout:
 
@@ -429,3 +630,5 @@ WindowManager:
 
                 app.root.current = 'pastfeed'
                 root.manager.transition.direction = 'up'
+
+
