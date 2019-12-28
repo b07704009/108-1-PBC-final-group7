@@ -107,14 +107,38 @@ def check_location(s_id):
             return locat[0][0]
 
 
-def being_used():
+def use_situation(s_id, situ):
+    # encoding: being used => used = 1; not being used => used = 0
     try:
         connect_to_db()
     except mysql.connector.Error as e:
         print("Error:", e)  # errno, sqlstate, msg values
         print("Please try again later")
     else:
-        pass
+        cursor.execute("UPDATE users SET used = '%s' WHERE student_id = '%s'" % (situ, s_id))
+        dbforpbc.commit()
+        cursor.close()
+        dbforpbc.close()
+
+
+def being_used(s_id):
+    try:
+        connect_to_db()
+    except mysql.connector.Error as e:
+        print("Error:", e)  # errno, sqlstate, msg values
+        print("Please try again later")
+    else:
+        cursor.execute("SELECT used FROM users WHERE student_id = '%s'" % s_id)
+        used = cursor.fetchall()
+        cursor.close()
+        dbforpbc.close()
+        if len(used) != 1:
+            return False
+        else:
+            if used[0][0] == "1":
+                return True
+            else:
+                return False
 
 
 def select_bike():
