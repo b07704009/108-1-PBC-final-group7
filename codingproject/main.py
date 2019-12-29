@@ -1,5 +1,7 @@
 
 import sys
+
+from kivy.uix.popup import Popup
 from mysql.connector.errors import Error
 import mysql.connector
 from kivy.garden.mapview import MapView, MapMarker
@@ -53,10 +55,44 @@ mainbutton.bind(on_release=dropdown.open)
 dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
 
+def login_success_or_not(login_id, password):
+    try:
+        connect_to_db()
+    except mysql.connector.Error as e:
+        print("Error:", e)  # errno, sqlstate, msg values
+        print("Please try again later")
+    else:
+        cursor.execute("SELECT student_id, password FROM users WHERE student_id = '%s'" % login_id)
+        result = cursor.fetchall()
+        if len(result) != 1:
+            return False
+        else:
+            if result[0][1] == password:
+                return True
+            else:
+                return False
+
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
     password = ObjectProperty(None)
 
+    def login_btn(self):
+        if login_success_or_not(self.studentid.text, self.password.text) is True:
+            self.reset()
+            kv.current = 'shareoff'
+
+
+        else:
+            pop = Popup(title='Invalid Login',
+                        content=Label(text='Invalid username or password.'),
+                        size_hint=(None, None), size=(400, 400))
+            pop.open()
+
+    def reset(self):
+        self.studentid.text = ""
+        self.password.text = ""
+
+'''
     def btn(self):
         if self.studentid.text == '' or self.password.text == '':
             pass
@@ -67,6 +103,7 @@ class LoginWindow(Screen):
             print(passwordlist)
             self.studentid.text = ''
             self.password.text = ''  # 跑完後清空填寫欄位
+'''
 
 
 class ImageButton(ButtonBehavior, Image):
