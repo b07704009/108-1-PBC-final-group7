@@ -33,13 +33,12 @@ config = {
 dbforpbc = mysql.connector.connect(**config)
 cursor = dbforpbc.cursor()
 
+
 def connect_to_db():
     global dbforpbc
     dbforpbc = mysql.connector.connect(**config)
     global cursor
     cursor = dbforpbc.cursor()
-
-
 
 
 class Map(MapView):
@@ -48,6 +47,7 @@ class Map(MapView):
 
 class CustomDropDown(DropDown):
     pass
+
 
 dropdown = CustomDropDown()
 mainbutton = Button(text='Hello', size_hint=(None, None))
@@ -71,6 +71,7 @@ def login_success_or_not(login_id, password):
                 return True
             else:
                 return False
+
 
 class LoginWindow(Screen):
     studentid = ObjectProperty(None)
