@@ -1,4 +1,5 @@
 import mysql.connector
+import datetime as dt
 from mysql.connector.errors import Error
 # if the connection failed, install 'mysql-connector-python'
 
@@ -141,7 +142,9 @@ def being_used(s_id):
                 return False
 
 
-def select_bike():
+def available_bike(locat):
+    # showing photo of bikes is still a problem(undone)
+    # only return list of the id of available bikes
     try:
         connect_to_db()
     except mysql.connector.Error as e:
@@ -149,21 +152,39 @@ def select_bike():
         print("Please try again later")
     else:
         # show all the bike in the selected location
-        pass
+        cursor.execute("SELECT \
+          users.student_id\
+          FROM users \
+          INNER JOIN parking_space ON users.current_location_id = parking_space.place_id \
+          WHERE parking_space.p_name = '%s' and users.used <> 1" % locat)
+        result = cursor.fetchall()
+        cursor.close()
+        dbforpbc.close()
+        available_list = []
+        for i in range(len(result)):
+            available_list.append(result[i][0])
+        return available_list
 
 
-def show_bike_info():
+def show_bike_info(s_id):
     try:
         connect_to_db()
     except mysql.connector.Error as e:
         print("Error:", e)  # errno, sqlstate, msg values
         print("Please try again later")
     else:
-        # photo, bike_password, student id of the owner
-        pass
+        # photo(undone), bike_password, student id of the owner
+        cursor.execute("SELECT student_id, bike_password FROM users WHERE student_id = '%s'" % s_id)
+        result = cursor.fetchall()
+        cursor.close()
+        dbforpbc.close()
+        bike_info = dict()
+        bike_info['student_id'] = result[0][0]
+        bike_info['bike_password'] = result[0][1]
+        return bike_info
 
 
-def rent_bike():
+def rent_bike(borrower, bike_owner):
     try:
         connect_to_db()
     except mysql.connector.Error as e:
@@ -173,10 +194,24 @@ def rent_bike():
         # remember to change the situation of the borrower's bike to 'being used'
         # add borrow record
         # rent time
-        pass
+        cursor.execute("SELECT current_location_id FROM users WHERE student_id = '%s'" % bike_owner)
+        cur_place = cursor.fetchall()[0][0]
+        sqlstuff = "INSERT INTO records (borrow_id, lent_id, borrow_time, borrow_place_id) " \
+                   "VALUES (%s,%s,%s,%s)"
+        b_time = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        insert = (borrower, bike_owner, b_time, cur_place)
+        cursor.execute(sqlstuff, insert)
+        dbforpbc.commit()
+        cursor.execute("SELECT record_id FROM records WHERE borrow_id = '%s'\
+                       AND borrow_time ='%s'" % (borrower, b_time))
+        the_record = cursor.fetchall()[0][0]
+        cursor.close()
+        dbforpbc.close()
+        use_situation(bike_owner, 1)
+        return the_record
 
 
-def return_bike():
+def return_bike(rec_id, r_place):
     try:
         connect_to_db()
     except mysql.connector.Error as e:
@@ -185,4 +220,15 @@ def return_bike():
     else:
         # change the situation of the bike to free and update the location
         # return time
-        pass
+        cursor.execute("SELECT place_id FROM parking_space WHERE p_name = '%s'" % r_place)
+        r_place_id = cursor.fetchall()[0][0]
+        cursor.execute("SELECT lent_id FROM records WHERE record_id = '%s'" % rec_id)
+        owner = cursor.fetchall()[0][0]
+        r_time = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute("UPDATE records SET return_time = '%s', return_place_id ='%i' \
+                       WHERE record_id = '%i'" % (r_time, r_place_id, rec_id))
+        dbforpbc.commit()
+        cursor.close()
+        dbforpbc.close()
+        use_situation(owner, 0)
+        update_loction(owner, r_place)
