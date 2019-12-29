@@ -72,15 +72,22 @@ def login_success_or_not(login_id, password):
             else:
                 return False
 
+studentidmem = ''
+
+
 class LoginWindow(Screen):
+
     studentid = ObjectProperty(None)
     password = ObjectProperty(None)
 
+
+
     def login_btn(self):
         if login_success_or_not(self.studentid.text, self.password.text) is True:
+            global studentidmem  # 記得學號
+            studentidmem = self.studentid.text
             self.reset()
             kv.current = 'shareoff'
-
 
         else:
             pop = Popup(title='Invalid Login',
@@ -91,19 +98,6 @@ class LoginWindow(Screen):
     def reset(self):
         self.studentid.text = ""
         self.password.text = ""
-
-'''
-    def btn(self):
-        if self.studentid.text == '' or self.password.text == '':
-            pass
-        else:
-            studentidlist.append(self.studentid.text)
-            passwordlist.append(self.password.text)
-            print(studentidlist)
-            print(passwordlist)
-            self.studentid.text = ''
-            self.password.text = ''  # 跑完後清空填寫欄位
-'''
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -148,7 +142,9 @@ class Bikeavailable(Screen):
 
 
 class Bikerent(Screen):
-    pass
+    def get_number(self):
+        number = input()
+        return number
 
 
 kv = Builder.load_file('my.kv',  encoding="utf-8")
