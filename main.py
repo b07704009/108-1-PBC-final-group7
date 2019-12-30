@@ -1,6 +1,7 @@
 
 import sys
-
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix import dropdown
 from kivy.uix.popup import Popup
 from mysql.connector.errors import Error
 import mysql.connector
@@ -13,7 +14,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.behaviors import ButtonBehavior
@@ -24,6 +25,8 @@ from kivy.base import runTouchApp
 studentidlist = []
 passwordlist = []
 
+place_to_park = []
+
 config = {
         'host': 'johnny.heliohost.org',
         'user': 'pbcbike_root',
@@ -33,7 +36,6 @@ config = {
 dbforpbc = mysql.connector.connect(**config)
 cursor = dbforpbc.cursor()
 
-
 def connect_to_db():
     global dbforpbc
     dbforpbc = mysql.connector.connect(**config)
@@ -41,18 +43,11 @@ def connect_to_db():
     cursor = dbforpbc.cursor()
 
 
+
+
 class Map(MapView):
     pass
 
-
-class CustomDropDown(DropDown):
-    pass
-
-
-dropdown = CustomDropDown()
-mainbutton = Button(text='Hello', size_hint=(None, None))
-mainbutton.bind(on_release=dropdown.open)
-dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
 
 
 def login_success_or_not(login_id, password):
@@ -72,16 +67,22 @@ def login_success_or_not(login_id, password):
             else:
                 return False
 
+studentidmem = ''
+
 
 class LoginWindow(Screen):
+
     studentid = ObjectProperty(None)
     password = ObjectProperty(None)
 
+
+
     def login_btn(self):
         if login_success_or_not(self.studentid.text, self.password.text) is True:
+            global studentidmem  # 記得學號
+            studentidmem = self.studentid.text
             self.reset()
-            kv.current = 'shareoff'
-
+            kv.current = 'shareon'
 
         else:
             pop = Popup(title='Invalid Login',
@@ -93,25 +94,8 @@ class LoginWindow(Screen):
         self.studentid.text = ""
         self.password.text = ""
 
-'''
-    def btn(self):
-        if self.studentid.text == '' or self.password.text == '':
-            pass
-        else:
-            studentidlist.append(self.studentid.text)
-            passwordlist.append(self.password.text)
-            print(studentidlist)
-            print(passwordlist)
-            self.studentid.text = ''
-            self.password.text = ''  # 跑完後清空填寫欄位
-'''
-
 
 class ImageButton(ButtonBehavior, Image):
-    pass
-
-
-class ShareOffWindow(Screen):
     pass
 
 
@@ -127,10 +111,38 @@ class MainWindow(Screen):
 class WindowManager(ScreenManager):
     pass
 
-
-class Mybikepark(Screen):
+class CustomDropDown(BoxLayout):
     pass
 
+
+parkplace = ''
+
+
+class Mybikepark(Screen):
+    global studentidmem
+    mainbtn = ObjectProperty(None)
+
+    def get_btn_str(self):
+        global parkplace
+        parkplace = self.mainbtn.text
+
+
+    def update_loction(self, s_id, cur_location):
+        try:
+            connect_to_db()
+        except mysql.connector.Error as e:
+            print("Error:", e)  # errno, sqlstate, msg values
+            print("Please try again later")
+        else:
+            cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % cur_location)
+            update_id = cursor.fetchall()[0][0]
+            cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, s_id))
+            dbforpbc.commit()
+            cursor.close()
+            dbforpbc.close()
+
+    def valuereturn(self):
+        place_to_park = 'Management Building II (Parking Lot)'
 
 class Basicinformation(Screen):
     pass

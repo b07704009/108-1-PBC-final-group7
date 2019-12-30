@@ -1,6 +1,5 @@
 WindowManager:
     LoginWindow:
-    ShareOffWindow:
     ShareOnWindow:
     MainWindow:
     Mybikepark:
@@ -9,6 +8,7 @@ WindowManager:
 	Bikerent:
 	Bikeavailable:
 	Successfulrent:
+
 <LoginWindow>:
     name: 'login'
     studentid: StudentID
@@ -74,54 +74,6 @@ WindowManager:
                 root.login_btn()
                 root.manager.transition.direction = 'up'
 
-<ShareOffWindow>:
-    name:'shareoff'
-
-    GridLayout
-        canvas.before:
-
-            BorderImage:
-                border:10, 10, 10, 10
-                source: 'background.png'
-                pos: self.pos
-                size: self.size
-
-    ImageButton:
-        source: 'off.png'
-        size_hint: 0.4, 0.1
-        pos_hint: {'x': 0.05, 'y': 0.85}
-        on_release:
-            app.root.current = 'shareon'
-
-    FloatLayout:
-        Button:
-            pos_hint: {'x':0.2, 'y':0.5}
-            size_hint: 0.6, 0.1
-            text:'Park bike'
-            background_color: 0.3,0.4,0.5,1
-            on_release:
-
-                app.root.current = 'bikepark'
-                root.manager.transition.direction = 'up'
-
-        Button:
-            pos_hint: {'x':0.2, 'y':0.3}
-            size_hint: 0.6, 0.1
-            text:'About me'
-            background_color: 0.3,0.4,0.5,1
-			on_release:
-
-                app.root.current = 'basicinformation'
-                root.manager.transition.direction = 'up'
-        Button:
-            pos_hint: {'x':0.2, 'y':0.7}
-            size_hint: 0.6, 0.1
-            text:'Find my bike'
-            background_color: 0.3,0.4,0.5,1
-			on_release:
-                app.root.current = 'pastfeed'
-                root.manager.transition.direction = 'up'
-
 
 <ShareOnWindow>:
     name:'shareon'
@@ -135,15 +87,6 @@ WindowManager:
                 source:'background.png'
                 pos: self.pos
                 size: self.size
-
-
-
-    ImageButton:
-        source: 'on.png'
-        size_hint: 0.1, 0.1
-        pos_hint: {'x': 0.05, 'y': 0.85}
-        on_release:
-            app.root.current = 'shareoff'
 
     FloatLayout:
 
@@ -234,24 +177,6 @@ WindowManager:
                 source: 'background.png'
                 pos: self.pos
                 size: self.size
-    CustomDropDown:
-
-        pos_hint: {'x':0.2}
-        size_hint: 0.4, 0.2
-        Button:
-            text: 'My first Item'
-            size_hint_y: None
-            height: 44
-
-        Button:
-            text: 'Unselectable item'
-            size_hint_y: None
-            height: 44
-        Button:
-            text: 'My second Item'
-            size_hint_y: None
-            height: 44
-
 
 
 
@@ -351,23 +276,74 @@ WindowManager:
     FloatLayout:
 
         Button:
-            pos_hint: {'x':0.2, 'y':0.3}
-            size_hint: 0.6, 0.1
+            pos_hint: {'x':0.1, 'y':0.1}
+            size_hint: 0.25, 0.1
             text:'Enter'
             background_color: 0.3,0.4,0.5,1
 			on_release:
                 app.root.current = 'pastfeed'
+                root.get_btn_str()
+                root.update_loction(studentidmem, parkplace)
                 root.manager.transition.direction = 'up'
 
 		Button:
-            pos_hint: {'x':0.6, 'y':0.1}
-            size_hint: 0.3, 0.1
+            pos_hint: {'x':0.65, 'y':0.1}
+            size_hint: 0.25, 0.1
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
 
-                app.root.current = 'shareoff'
+                app.root.current = 'shareon'
                 root.manager.transition.direction = 'up'
+
+    CustomDropDown:
+
+        mainbtn: MainBtn
+
+        Button:
+            id: MainBtn
+            text: 'places to park'
+            on_release: dropdown.open(self)
+            on_parent: dropdown.dismiss()
+            pos_hint: {'x':0.15, 'y':0.3}
+            size_hint: 0.7, 0.1
+            height: '48dp'
+
+        DropDown:
+
+            id: dropdown
+            on_select: MainBtn.text = '{}'.format(args[1])
+
+            Button:
+                text: 'Management Building II (Parking Lot)'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('Management Building II (Parking Lot)')
+                            root.valuereturn()
+
+            Button:
+                text: 'Management Building II (Roosevelt Road)'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('Management Building II (Roosevelt Road)')
+
+            Button:
+                text: 'Management Building II (Inside The Campus)'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('Management Building II (Inside The Campus)')
+
+            Button:
+                text: 'Management Building I'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('Management Building I')
+
+            Button:
+                text: 'Common Subjects Building'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('Common Subjects Building')
 
 
 <Basicinformation>:
@@ -398,7 +374,7 @@ WindowManager:
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
-                app.root.current = 'shareoff'
+                app.root.current = 'shareon'
                 root.manager.transition.direction = 'up'
 <Pastfeed>:
 	name:'pastfeed'
@@ -431,7 +407,7 @@ WindowManager:
             text:'Back to menu'
             background_color: 0.3,0.4,0.5,1
             on_release:
-                app.root.current = 'shareoff'
+                app.root.current = 'shareon'
                 root.manager.transition.direction = 'up'
 <Bikerent>:
 	name:'bikerent'
@@ -443,25 +419,6 @@ WindowManager:
                 source:'background.png'
                 pos: self.pos
                 size: self.size
-
-
-	CustomDropDown:
-
-        pos_hint: {'x':0.2}
-        size_hint: 0.4, 0.2
-        Button:
-            text: 'My first Item'
-            size_hint_y: None
-            height: 44
-
-        Button:
-            text: 'Unselectable item'
-            size_hint_y: None
-            height: 44
-        Button:
-            text: 'My second Item'
-            size_hint_y: None
-            height: 44
 
 
 
@@ -481,7 +438,6 @@ WindowManager:
             text:'Back'
             background_color: 0.3,0.4,0.5,1
             on_release:
-
                 app.root.current = 'shareon'
                 root.manager.transition.direction = 'up'
 <Bikeavailable>:
