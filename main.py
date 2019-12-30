@@ -99,8 +99,7 @@ class ShareOnWindow(Screen):
         pass
 
 
-class MainWindow(Screen):
-    pass
+
 
 
 class WindowManager(ScreenManager):
@@ -144,16 +143,7 @@ class Pastfeed(Screen):
     pass
 
 
-class Successfulrent(Screen):
-    pass
 
-
-class Bikeavailable(Screen):
-    pass
-
-
-class Bikerent(Screen):
-    pass
 
 
 kv = Builder.load_file('my.kv',  encoding="utf-8")
