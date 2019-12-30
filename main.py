@@ -48,7 +48,7 @@ def connect_to_db():
 class Map(MapView):
     pass
 
-
+cursor.fetchall = []
 def login_success_or_not(login_id, password):
     try:
         connect_to_db()
@@ -115,7 +115,7 @@ class Mybikepark(Screen):
 
     def valuereturn(self, str):
         parking_place[0] = str
-        print(str)
+
 
 
     def update_location(self):
@@ -126,6 +126,7 @@ class Mybikepark(Screen):
             print("Please try again later")
         else:
             cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % parking_place[0])
+            print(parking_place[0])
             update_id = cursor.fetchall()[0][0]
             cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, studentidmem[0]))
             dbforpbc.commit()
