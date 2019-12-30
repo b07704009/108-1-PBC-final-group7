@@ -11,6 +11,7 @@ from dominate import tags
 from flask import Flask, render_template, request
 
 import sql_function
+import mysql
 
 name_list = [0]
 student_id_dict = dict()
@@ -22,7 +23,7 @@ password_dict = dict()
 name_list_temp = [0]
 student_id_temp = [0]
 telephone_number_temp = [0]
-school_bike_license_temp = [0]
+school_bike_license_temp = ['z']
 bike_lock_number_temp = [0]
 password_temp = [0]
 to_convert = 0
@@ -112,7 +113,7 @@ def dominate_homepage():
                     background-color: #F9F8F1;
                     color: #2C232A;
                     font-family: sans-serif;
-                    font-size: 14;
+                    font-size: 30;
                     text-align: center;
                 }
                  section{
@@ -132,7 +133,7 @@ def dominate_homepage():
         with tags.section():
             tags.h1('welcome to the page')
             tags.input(type='button', value='click me', onclick="location.href='http://127.0.0.1:5000/jump'",
-                       style="width:120px; background-color:pink;")
+                       style="width:120px; background-color:pink; font-size: 14;")
 
     fn = 'templates/index1.html'
     with open(file=fn, mode='w', encoding='utf-8') as f:
@@ -166,6 +167,7 @@ def dominate_register_page():
                 color: #2C232A;
                 font-family: sans-serif;
                 font-size: 14;
+                text-align: center;
             }
 
             section{
@@ -257,38 +259,27 @@ def dominate_enter_page():
                 font-size: 14;
                 text-align: center;
             }
-            section{
-                    width: 250px;
-                    height: 250px;
-                    position: absolute;
-                    overflow: auto;
-                    text-align: center;
-            }
-
         """)
 
     with doc.body:
         tags.h1('welcome' + str(name_list_temp[0]))
         tags.h2('please confirm your information')
-        with tags.section():
-            with tags.section(cls='information check'):
-                with tags.legend():
-                    tags.label('your name is' + str(name_list_temp[0]))
-                with tags.legend():
-                    tags.label('your password is' + str(password_temp[0]))
-                with tags.legend():
-                    tags.label('your student id is' + str(student_id_temp[0]))
-                with tags.legend():
-                    tags.label('your telephone number is' + str(telephone_number_temp[0]))
-                with tags.legend():
-                    tags.label('the status of your bike_lice' + str(school_bike_license_temp[0]))
-                with tags.legend():
-                    tags.label('your bike lock number is' + str(bike_lock_number_temp[0]))
-                with tags.legend():
-                    tags.label('your password is'+ str(password_temp[0]))
-                with tags.div(cls='button', style="margin:0 auto; width:250px;"):
-                    tags.input(type='button', value='confirm', style="width:120px; background-color:pink;",
-                               onclick="location.href='http://127.0.0.1:5000/entered'")
+        with tags.section(cls='information check'):
+            with tags.div(cls='name', style="text-align: center"):
+                tags.label('your name is' + str(name_list_temp[0]))
+            with tags.div(cls='password', style="text-align: center"):
+                tags.label('your password is' + str(password_temp[0]))
+            with tags.div(cls='student_id', style="text-align: center"):
+                tags.label('your student id is' + str(student_id_temp[0]))
+            with tags.div(cls='telephone', style="text-align: center"):
+                tags.label('your telephone number is' + str(telephone_number_temp[0]))
+            with tags.div(cls='license', style="text-align: center"):
+                tags.label('the status of your bike_lice' + str(school_bike_license_temp[0]))
+            with tags.div(cls='lock_number', style="text-align: center"):
+                tags.label('your bike lock number is' + str(bike_lock_number_temp[0]))
+            with tags.div(cls='button', style="margin:0 auto; width:250px;"):
+                tags.input(type='button', value='confirm', style="width:120px; background-color:pink;",
+                           onclick="location.href='http://127.0.0.1:5000/entered'")
 
     fn = 'templates/index3.html'
     with open(file=fn, mode='w', encoding='utf-8') as f:
@@ -332,7 +323,6 @@ def dominate_final_page():
 
 
 dominate_final_page()
-
 
 app = Flask(__name__)
 
@@ -392,11 +382,14 @@ def enter_success():
     student_id_dict[index] = student_id_temp[0]
     telephone_number_dict[index] = telephone_number_temp[0]
     school_bike_license_dict[index] = bike_lock_number_temp[0]
+    try:
+        fn = (name_list_temp[0], student_id_temp[0], telephone_number_temp[0], bike_lock_number_temp[0],
+              school_bike_license_temp[0], password_temp[0])
+        sql_function.user_register(fn, to_convert)
+        return render_template('index4.html')
 
-    fn = (name_list_temp[0], student_id_temp[0], telephone_number_temp[0], bike_lock_number_temp[0],
-          school_bike_license_temp[0], password_temp[0])
-    sql_function.user_register(fn, to_convert)
-    return render_template('index4.html')
+    except mysql.connector.Error:
+        return "register failed! Please try again"
 
 
 if __name__ == "__main__":

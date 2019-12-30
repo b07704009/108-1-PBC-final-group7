@@ -25,7 +25,8 @@ from kivy.base import runTouchApp
 studentidlist = []
 passwordlist = []
 
-place_to_park = []
+studentidmem = ['000']
+parking_place = ['a']
 
 config = {
         'host': 'johnny.heliohost.org',
@@ -36,6 +37,7 @@ config = {
 dbforpbc = mysql.connector.connect(**config)
 cursor = dbforpbc.cursor()
 
+
 def connect_to_db():
     global dbforpbc
     dbforpbc = mysql.connector.connect(**config)
@@ -43,11 +45,8 @@ def connect_to_db():
     cursor = dbforpbc.cursor()
 
 
-
-
 class Map(MapView):
     pass
-
 
 
 def login_success_or_not(login_id, password):
@@ -67,8 +66,6 @@ def login_success_or_not(login_id, password):
             else:
                 return False
 
-studentidmem = ''
-
 
 class LoginWindow(Screen):
 
@@ -76,11 +73,9 @@ class LoginWindow(Screen):
     password = ObjectProperty(None)
 
 
-
     def login_btn(self):
         if login_success_or_not(self.studentid.text, self.password.text) is True:
-            global studentidmem  # 記得學號
-            studentidmem = self.studentid.text
+            studentidmem[0] = self.studentid.text
             self.reset()
             kv.current = 'shareon'
 
@@ -111,38 +106,35 @@ class MainWindow(Screen):
 class WindowManager(ScreenManager):
     pass
 
+
 class CustomDropDown(BoxLayout):
     pass
 
 
-parkplace = ''
-
-
 class Mybikepark(Screen):
-    global studentidmem
     mainbtn = ObjectProperty(None)
 
-    def get_btn_str(self):
-        global parkplace
-        parkplace = self.mainbtn.text
+    def valuereturn(self, str):
+        parking_place[0] = str
+        print(str)
 
 
-    def update_loction(self, s_id, cur_location):
+    def update_location(self):
         try:
             connect_to_db()
         except mysql.connector.Error as e:
             print("Error:", e)  # errno, sqlstate, msg values
             print("Please try again later")
         else:
-            cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % cur_location)
+            cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % parking_place[0])
             update_id = cursor.fetchall()[0][0]
-            cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, s_id))
+            cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, studentidmem[0]))
             dbforpbc.commit()
             cursor.close()
             dbforpbc.close()
 
-    def valuereturn(self):
-        place_to_park = 'Management Building II (Parking Lot)'
+
+
 
 class Basicinformation(Screen):
     pass
