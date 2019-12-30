@@ -48,7 +48,7 @@ def connect_to_db():
 class Map(MapView):
     pass
 
-cursor.fetchall = []
+
 def login_success_or_not(login_id, password):
     try:
         connect_to_db()
