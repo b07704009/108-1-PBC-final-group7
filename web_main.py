@@ -131,7 +131,8 @@ def dominate_homepage():
 
     with doc.body:
         with tags.section():
-            tags.h1('welcome to the page')
+            with tags.div(cls='headline', style='font-size: 30;'):
+                tags.h1('Find Your Bike')
             tags.input(type='button', value='click me', onclick="location.href='http://127.0.0.1:5000/jump'",
                        style="width:120px; background-color:pink; font-size: 14;")
 
@@ -174,7 +175,7 @@ def dominate_register_page():
                 width: 500px;
                 height: 500px;
                 position: absolute;
-                top: 50%;
+                top: 52%;
                 left: 50%;
                 overflow: auto;
                 text-align: center;
@@ -199,7 +200,8 @@ def dominate_register_page():
         """)
 
     with doc.body:
-        tags.h1('Register Page')
+        with tags.div(clas='headline', style='font-size: 20;'):
+            tags.h1('Register Page')
         with tags.section():
             with tags.form(method='POST', action="/jump", enctype="multipart/form-data"):
                 with tags.legend():
@@ -287,6 +289,9 @@ def dominate_enter_page():
     print(f)
 
 
+dominate_enter_page()
+
+
 def dominate_final_page():
     """
     第四頁：感謝頁，
@@ -323,6 +328,60 @@ def dominate_final_page():
 
 
 dominate_final_page()
+
+
+def dominate_error_page():
+    """
+        第五頁：資料庫連接錯誤頁面，對應到  @app.route('/entered')  及其函數  eneter_success()
+        目標：利用dominate寫出homepage的html並在templates資料夾中存成index5.html
+
+        分為三個區塊
+        doc = dominate.document()
+        with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+        with doc.body   (包含 words and a button)
+
+        最後寫入文件中(在templates資料夾中存成index5.html)
+        """
+    doc = dominate.document(title='error_page')
+
+    with doc.head:
+        tags.meta(name='charset', content="utf-8")
+        tags.style("""\
+                    body {
+                        background-color: #F9F8F1;
+                        color: #2C232A;
+                        font-family: sans-serif;
+                        font-size: 30;
+                        text-align: center;
+                    }
+                     section{
+                          width: 300px;
+                          height: 300px;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          overflow: auto;
+                          text-align: center;
+                          margin-left:-150px;
+                          margin-top:-150px;
+                    } 
+             """)
+
+    with doc.body:
+        with tags.section():
+            with tags.div(cls='headline', style='font-size: 30;'):
+                tags.h1('Register failed! Please try again')
+            tags.input(type='button', value='return back', onclick="location.href='http://127.0.0.1:5000/'",
+                       style="width:120px; background-color:pink; font-size: 14;")
+
+    fn = 'templates/index5.html'
+    with open(file=fn, mode='w', encoding='utf-8') as f:
+        f.write(doc.render())
+    print(f)
+
+
+dominate_error_page()
+
 
 app = Flask(__name__)
 
@@ -389,7 +448,7 @@ def enter_success():
         return render_template('index4.html')
 
     except mysql.connector.Error:
-        return "register failed! Please try again"
+        return render_template('index5.html')
 
 
 if __name__ == "__main__":
