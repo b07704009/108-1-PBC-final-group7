@@ -6,12 +6,13 @@ Created on 25 DEC 23:14
 """
 
 import os
+
 import dominate
+import mysql
 from dominate import tags
 from flask import Flask, render_template, request
 
 import sql_function
-import mysql
 
 name_list = [0]
 student_id_dict = dict()
