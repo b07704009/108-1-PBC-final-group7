@@ -1,4 +1,3 @@
-
 import sys
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix import dropdown
@@ -94,12 +93,39 @@ class ImageButton(ButtonBehavior, Image):
     pass
 
 
+checklocation = ['???']
+
+
 class ShareOnWindow(Screen):
-    def btnbasicinformation(self):
-        pass
 
+    def check_location(self):
+        try:
+            connect_to_db()
+        except mysql.connector.Error as e:
+            print("Error:", e)  # errno, sqlstate, msg values
+            print("Please try again later")
+        else:
+            sql = "SELECT \
+              parking_space.p_name\
+              FROM users \
+              INNER JOIN parking_space ON users.current_location_id = parking_space.place_id \
+              WHERE users.student_id = '%s'"
+            cursor.execute(sql % studentidmem[0])
+            locat = cursor.fetchall()
+            cursor.close()
+            dbforpbc.close()
+            if len(locat) != 1:
+                return "Something wrong"
+            else:
+                checklocation[0] = locat[0][0]
 
+    def put_into_next(self):
+        main = self.manager.get_screen('pastfeed')
+        main.changeplacelabel.text = checklocation[0]
 
+    def find_bike_btn(self):
+        self.check_location()
+        self.put_into_next()
 
 
 class WindowManager(ScreenManager):
@@ -126,25 +152,50 @@ class Mybikepark(Screen):
             print("Please try again later")
         else:
             cursor.execute("SELECT place_id FROM parking_space where p_name = '%s' " % parking_place[0])
-            print(parking_place[0])
             update_id = cursor.fetchall()[0][0]
             cursor.execute("UPDATE users SET current_location_id = '%s' WHERE student_id = '%s'" % (update_id, studentidmem[0]))
             dbforpbc.commit()
             cursor.close()
             dbforpbc.close()
 
+    def check_location(self):
+        try:
+            connect_to_db()
+        except mysql.connector.Error as e:
+            print("Error:", e)  # errno, sqlstate, msg values
+            print("Please try again later")
+        else:
+            sql = "SELECT \
+              parking_space.p_name\
+              FROM users \
+              INNER JOIN parking_space ON users.current_location_id = parking_space.place_id \
+              WHERE users.student_id = '%s'"
+            cursor.execute(sql % studentidmem[0])
+            locat = cursor.fetchall()
+            cursor.close()
+            dbforpbc.close()
+            if len(locat) != 1:
+                return "Something wrong"
+            else:
+                checklocation[0] = locat[0][0]
 
+    def put_into_next(self):
+        main = self.manager.get_screen('pastfeed')
+        main.changeplacelabel.text = checklocation[0]
+
+    def find_bike_btn(self):
+        self.check_location()
+        self.put_into_next()
 
 
 class Basicinformation(Screen):
     pass
 
+whatplaceisnow = []
+
 
 class Pastfeed(Screen):
-    pass
-
-
-
+    changeplacelabel = ObjectProperty(None)
 
 
 kv = Builder.load_file('my.kv',  encoding="utf-8")

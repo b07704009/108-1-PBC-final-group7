@@ -101,6 +101,7 @@ WindowManager:
             text:'Find My Bike'
             background_color: 0.3,0.4,0.5,1
 			on_release:
+			    root.find_bike_btn()
                 app.root.current = 'pastfeed'
                 root.manager.transition.direction = 'up'
 		Button:
@@ -233,6 +234,7 @@ WindowManager:
 			on_release:
                 app.root.current = 'pastfeed'
                 root.update_location()
+                root.find_bike_btn()
                 root.manager.transition.direction = 'up'
 
 		Button:
@@ -330,6 +332,7 @@ WindowManager:
                 root.manager.transition.direction = 'up'
 <Pastfeed>:
 	name:'pastfeed'
+	changeplacelabel: ChangePlaceLabel
 
 	GridLayout
         canvas.before:
@@ -344,15 +347,21 @@ WindowManager:
 	FloatLayout:
 
 		Label:
-            pos_hint: {'x':0.2, 'y':0.8}
-            size_hint: 0.6, 0.1
-            text:'Past feeds'
+            pos_hint: {'x':0.15, 'y':0.63}
+            size_hint: 0.7, 0.1
+            text:'Your bike is at'
+            font_size: 60
             color: 0.3,0.6,0.7,1
-		Label:
-            pos_hint: {'x':0.2, 'y':0.3}
-            size_hint: 0.6, 0.1
-            text:'Latest'
+
+        Label:
+            id: ChangePlaceLabel
+            pos_hint: {'x':0.1, 'y':0.43}
+            size_hint: 0.8, 0.14
+            text:''
+            font_size: 60
             color: 0.3,0.6,0.7,1
+
+
 		Button:
             pos_hint: {'x':0.6, 'y':0.1}
             size_hint: 0.3, 0.1
