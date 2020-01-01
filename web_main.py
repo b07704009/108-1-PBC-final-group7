@@ -206,22 +206,22 @@ def dominate_register_page():
         with tags.section():
             with tags.form(method='POST', action="/jump", enctype="multipart/form-data"):
                 with tags.legend():
-                    tags.label('請輸入姓名')
+                    tags.label('請輸入姓名(中文)')
                     tags.input(type='text', name='name', size=20)
                 with tags.legend():
                     tags.label('請輸入密碼')
                     tags.input(type='text', name='password', size=20)
                 with tags.legend():
-                    tags.label('請輸入學號')
+                    tags.label('請輸入學號(1個大寫英文字母+8個數字)')
                     tags.input(type='text', name='student_id', size=20)
                 with tags.legend():
-                    tags.label('請輸入電話')
+                    tags.label('請輸入電話(請輸入10位數字)')
                     tags.input(type='text', name='telephone_number', size=20)
                 with tags.legend():
                     tags.label('是否有台大車證(Y/N)')
                     tags.input(type='text', name='school_bike_license', size=20)
                 with tags.legend():
-                    tags.label('腳踏車的密碼(選填)')
+                    tags.label('腳踏車的密碼(選填、請輸入數字)')
                     tags.input(type='text', name='bike_lock_number', size=20)
                 with tags.legend():
                     tags.label('上傳圖片')
@@ -384,6 +384,55 @@ def dominate_error_page():
 dominate_error_page()
 
 
+def dominate_error_page():
+    """
+        第五頁：資料庫連接錯誤頁面，對應到  @app.route('/entered')  及其函數  eneter_success()
+        目標：利用dominate寫出homepage的html並在templates資料夾中存成index5.html
+
+        分為三個區塊
+        doc = dominate.document()
+        with doc.head   (包含css的style;meta確保中文可以運行在utf-8下)
+        with doc.body   (包含 words and a button)
+
+        最後寫入文件中(在templates資料夾中存成index5.html)
+        """
+    doc = dominate.document(title='error_page')
+
+    with doc.head:
+        tags.meta(name='charset', content="utf-8")
+        tags.style("""\
+                    body {
+                        background-color: #F9F8F1;
+                        color: #2C232A;
+                        font-family: sans-serif;
+                        font-size: 30;
+                        text-align: center;
+                    }
+                     section{
+                          width: 300px;
+                          height: 300px;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          overflow: auto;
+                          text-align: center;
+                          margin-left:-150px;
+                          margin-top:-150px;
+                    } 
+             """)
+
+    with doc.body:
+        with tags.section():
+            with tags.div(cls='headline', style='font-size: 30;'):
+                tags.h1("wrong information! please try again")
+            tags.input(type='button', value='return back', onclick="location.href='http://127.0.0.1:5000/'",
+                       style="width:120px; background-color:pink; font-size: 14;")
+
+    fn = 'templates/index6.html'
+    with open(file=fn, mode='w', encoding='utf-8') as f:
+        f.write(doc.render())
+    print(f)
+
 app = Flask(__name__)
 
 
@@ -398,8 +447,45 @@ def homepage_run():
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
+def is_all_chinese(strs):
+    for _char in strs:
+        if not '\u4e00' <= _char <= '\u9fa5':
+            return False
+    return True
+
+
+def correct_telephone(strs):
+    if strs.isdigit() and len(strs) == 10:
+            return True
+    else:
+        return False
+
+
+def is_number(uchar):
+    """判断一个unicode是否是数字"""
+    if uchar >= u'\u0030' and uchar<=u'\u0039':
+        return True
+    else:
+        return False
+
+
+def correct_student_id(strs):
+    str_num = strs - strs[0]
+    if len(strs) == 9 and str_num.isalpha() and is_number(strs[0]):
+            return True
+    else:
+        return False
+
+def correct_school_bike_license(strs):
+    if strs == 'Y' or 'Z':
+        return True
+    else:
+        return False
+
+
+
 @app.route('/jump', methods=['GET', 'POST'])
-def registerpage_run():
+def register_page_run():
     """
     目標：先顯示index2.html，對應到 dominate_register_page的函數，儲存使用者在index2.html上輸入的所有資訊及相片
          若request.method為post(代表按下了register頁面的submit按鈕)顯示index3.html，對應到 dominate_enter_page的函數，
@@ -415,18 +501,23 @@ def registerpage_run():
         bike_lock_number_temp[0] = request.values['bike_lock_number']
         password_temp[0] = request.values['password']
 
-        # 照片的
-        img = request.files.get('photo')
-        path = basedir + "/static/photo/"
-        file_path = path + img.filename
-        img.save(file_path)
-        global to_convert
-        to_convert = file_path
-        print('上傳頭像成功，上傳的使用者是：' + index)
+        if is_all_chinese(index) and correct_telephone(password_temp[0]) and correct_student_id(student_id_temp[0]) and correct_school_bike_license(school_bike_license_temp[0]):
+            # 照片的
+            img = request.files.get('photo')
+            path = basedir + "/static/photo/"
+            file_path = path + img.filename
+            img.save(file_path)
+            global to_convert
+            to_convert = file_path
+            print('上傳頭像成功，上傳的使用者是：' + index)
 
-        dominate_enter_page()
-        return render_template('index3.html')
+            dominate_enter_page()
+            return render_template('index3.html')
+        else:
+            return render_template('index6.html')
+
     return render_template('index2.html')
+
 
 
 @app.route('/entered')
