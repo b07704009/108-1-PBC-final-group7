@@ -110,27 +110,28 @@ def dominate_homepage():
     with doc.head:
         tags.meta(name='charset', content="utf-8")
         tags.style("""\
-                body {
-                    background-color: #F9F8F1;
-                    color: #2C232A;
-                    font-family: sans-serif;
-                    font-size: 30;
-                    text-align: center;
-                }
-                 section{
-                      width: 300px;
-                      height: 300px;
-                      position: absolute;
-                      top: 50%;
-                      left: 50%;
-                      overflow: auto;
-                      text-align: center;
-                      margin-left:-150px;
-                      margin-top:-150px;
-                } 
+            body {
+                background-color: #F9F8F1;
+                color: #2C232A;
+                font-family: sans-serif;
+                font-size: 30;
+                text-align: center;
+            }
+             section{
+                  width: 300px;
+                  height: 300px;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  overflow: auto;
+                  text-align: center;
+                  margin-left:-150px;
+                  margin-top:-150px;
+            } 
          """)
 
     with doc.body:
+
         with tags.section():
             with tags.div(cls='headline', style='font-size: 30;'):
                 tags.h1('Find Your Bike')
@@ -171,17 +172,14 @@ def dominate_register_page():
                 font-size: 14;
                 text-align: center;
             }
-
-            section{
-                width: 500px;
-                height: 500px;
+            
+             section{
+                width: 800px;
+                height: 800px;
                 position: absolute;
-                top: 52%;
-                left: 50%;
+                top: 15%;
+                left: 15%;
                 overflow: auto;
-                text-align: center;
-                margin-left:-250px;
-                margin-top:-250px;
                 text-align: center;
             }
 
@@ -190,7 +188,7 @@ def dominate_register_page():
                 display: inline-block;
                 padding: 3px 6px;
                 text-align: center;
-                width: 200px;
+                width: 500px;
                 vertical-align: top;
             }
 
@@ -269,17 +267,17 @@ def dominate_enter_page():
         tags.h2('please confirm your information')
         with tags.section(cls='information check'):
             with tags.div(cls='name', style="text-align: center"):
-                tags.label('your name is' + str(name_list_temp[0]))
+                tags.label('your name is  ' + str(name_list_temp[0]))
             with tags.div(cls='password', style="text-align: center"):
-                tags.label('your password is' + str(password_temp[0]))
+                tags.label('your password is  ' + str(password_temp[0]))
             with tags.div(cls='student_id', style="text-align: center"):
-                tags.label('your student id is' + str(student_id_temp[0]))
+                tags.label('your student id is  ' + str(student_id_temp[0]))
             with tags.div(cls='telephone', style="text-align: center"):
-                tags.label('your telephone number is' + str(telephone_number_temp[0]))
+                tags.label('your telephone number is  ' + str(telephone_number_temp[0]))
             with tags.div(cls='license', style="text-align: center"):
-                tags.label('the status of your bike_lice' + str(school_bike_license_temp[0]))
+                tags.label('the status of your bike_lice  ' + str(school_bike_license_temp[0]))
             with tags.div(cls='lock_number', style="text-align: center"):
-                tags.label('your bike lock number is' + str(bike_lock_number_temp[0]))
+                tags.label('your bike lock number is  ' + str(bike_lock_number_temp[0]))
             with tags.div(cls='button', style="margin:0 auto; width:250px;"):
                 tags.input(type='button', value='confirm', style="width:120px; background-color:pink;",
                            onclick="location.href='http://127.0.0.1:5000/entered'")
@@ -306,7 +304,7 @@ def dominate_final_page():
     最後寫入文件中(在templates資料夾中存成index4.html)
     """
 
-    doc = dominate.document(title="photo_page")
+    doc = dominate.document(title="thank_you_page")
     with doc.head:
         tags.meta(name='charset', content="utf-8")
         tags.style("""\
@@ -355,23 +353,12 @@ def dominate_error_page():
                         font-size: 30;
                         text-align: center;
                     }
-                     section{
-                          width: 300px;
-                          height: 300px;
-                          position: absolute;
-                          top: 50%;
-                          left: 50%;
-                          overflow: auto;
-                          text-align: center;
-                          margin-left:-150px;
-                          margin-top:-150px;
-                    } 
              """)
 
     with doc.body:
         with tags.section():
             with tags.div(cls='headline', style='font-size: 30;'):
-                tags.h1('Register failed! Please try again')
+                tags.h1('Register failed! You have registered before!')
             tags.input(type='button', value='return back', onclick="location.href='http://127.0.0.1:5000/'",
                        style="width:120px; background-color:pink; font-size: 14;")
 
@@ -384,7 +371,7 @@ def dominate_error_page():
 dominate_error_page()
 
 
-def dominate_error_page():
+def dominate_wrong_information_page():
     """
         第五頁：資料庫連接錯誤頁面，對應到  @app.route('/entered')  及其函數  eneter_success()
         目標：利用dominate寫出homepage的html並在templates資料夾中存成index5.html
@@ -424,7 +411,7 @@ def dominate_error_page():
     with doc.body:
         with tags.section():
             with tags.div(cls='headline', style='font-size: 30;'):
-                tags.h1("wrong information! please try again")
+                tags.h2("wrong information! please try again")
             tags.input(type='button', value='return back', onclick="location.href='http://127.0.0.1:5000/'",
                        style="width:120px; background-color:pink; font-size: 14;")
 
@@ -432,6 +419,65 @@ def dominate_error_page():
     with open(file=fn, mode='w', encoding='utf-8') as f:
         f.write(doc.render())
     print(f)
+
+
+dominate_wrong_information_page()
+
+
+def is_all_chinese(strs):
+    for _char in strs:
+        if not '\u4e00' <= _char <= '\u9fa5':
+            print('name key_in wrong')
+            return False
+    print('name key_in right')
+    return True
+
+
+def correct_telephone(strs):
+    num_len = 0
+    for i in strs:
+        num_len += 1
+        if not is_number(i):
+            print('telephone key_in wrong')
+            return False
+    if num_len == 10:
+        print('telephone_number right')
+        return True
+    else:
+        print('telephone key_in wrong')
+        return False
+
+
+def is_number(uchar):
+    """判断一个unicode是否是数字"""
+    if u'\u0030' <= uchar <= u'\u0039':
+        return True
+    else:
+        return False
+
+
+def correct_student_id(strs):
+    str_num = ''
+    num_id_len = 0
+    for i in range(1, len(strs)):
+        str_num += (strs[i])
+        num_id_len += 1
+    if num_id_len == 8 and 'A' <= strs[0] <= 'Z' and is_number(str_num):
+        print('id right', str_num, num_id_len, strs[0])
+        return True
+    else:
+        print('id key_in wrong',str_num, num_id_len, strs[0])
+        return False
+
+
+def correct_school_bike_license(strs):
+    if strs == 'Y' or 'Z':
+        print('lic right')
+        return True
+    else:
+        print('bike_license key_in wrong')
+        return False
+
 
 app = Flask(__name__)
 
@@ -447,43 +493,6 @@ def homepage_run():
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-def is_all_chinese(strs):
-    for _char in strs:
-        if not '\u4e00' <= _char <= '\u9fa5':
-            return False
-    return True
-
-
-def correct_telephone(strs):
-    if strs.isdigit() and len(strs) == 10:
-            return True
-    else:
-        return False
-
-
-def is_number(uchar):
-    """判断一个unicode是否是数字"""
-    if uchar >= u'\u0030' and uchar<=u'\u0039':
-        return True
-    else:
-        return False
-
-
-def correct_student_id(strs):
-    str_num = strs - strs[0]
-    if len(strs) == 9 and str_num.isalpha() and is_number(strs[0]):
-            return True
-    else:
-        return False
-
-def correct_school_bike_license(strs):
-    if strs == 'Y' or 'Z':
-        return True
-    else:
-        return False
-
-
-
 @app.route('/jump', methods=['GET', 'POST'])
 def register_page_run():
     """
@@ -497,11 +506,11 @@ def register_page_run():
         password_temp[0] = request.values['password']
         student_id_temp[0] = request.values['student_id']
         telephone_number_temp[0] = request.values['telephone_number']
-        school_bike_license_temp[0] = request.values['bike_lock_number']
+        school_bike_license_temp[0] = request.values['school_bike_license']
         bike_lock_number_temp[0] = request.values['bike_lock_number']
         password_temp[0] = request.values['password']
 
-        if is_all_chinese(index) and correct_telephone(password_temp[0]) and correct_student_id(student_id_temp[0]) and correct_school_bike_license(school_bike_license_temp[0]):
+        if is_all_chinese(index) and correct_telephone(telephone_number_temp[0]) and correct_student_id(student_id_temp[0]) and correct_school_bike_license(school_bike_license_temp[0]):
             # 照片的
             img = request.files.get('photo')
             path = basedir + "/static/photo/"
@@ -514,10 +523,10 @@ def register_page_run():
             dominate_enter_page()
             return render_template('index3.html')
         else:
+            print('! key_in wrong !')
             return render_template('index6.html')
 
     return render_template('index2.html')
-
 
 
 @app.route('/entered')
