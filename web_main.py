@@ -288,9 +288,6 @@ def dominate_enter_page():
     print(f)
 
 
-dominate_enter_page()
-
-
 def dominate_final_page():
     """
     第四頁：感謝頁，
